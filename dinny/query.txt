@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SELECT * FROM obat;
 SELECT * FROM pabrik;
 SELECT * FROM detail_transaksi;
@@ -8,3 +9,15 @@ SELECT * FROM `obat` WHERE pabrik = 'Sido Muncul';
 SELECT nama, pembayaran FROM pembeli WHERE pembayaran = 'Credit';
 SELECT * FROM `obat` WHERE jenis = 'Nyeri'; 
 SELECT * FROM `transaksi` WHERE total = '70000';
+=======
+SELECT * FROM obat;
+SELECT * FROM pabrik;
+SELECT * FROM detail_transaksi;
+SELECT id_pembeli, total FROM transaksi;
+SELECT nama, pembayaran FROM pembeli; 
+SELECT nama, pembayaran FROM pembeli WHERE pembayaran = 'cash'; 
+SELECT * FROM `obat` WHERE pabrik = 'Sido Muncul';
+SELECT nama, pembayaran FROM pembeli WHERE pembayaran = 'Credit';
+SELECT * FROM `obat` WHERE jenis = 'Nyeri'; 
+SELECT * FROM `transaksi` WHERE total = '70000';
+>>>>>>> d6f0417adfd8bf7c209677645fbabc51f3119dd5
