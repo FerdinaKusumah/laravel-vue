@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 1. UPDATE `detail_pabrik` SET `website`='[www.kalbefarma.co.id]' WHERE  id_pabrik=1;
 
 2. UPDATE `detail_transaksi` SET `harga`='[70000]' WHERE id_obat=8;
@@ -7,3 +8,14 @@
 4. DELETE FROM `transaksi` WHERE id=22;
 
 5. DELETE FROM `pabrik` WHERE id=11;
+=======
+1. UPDATE `detail_pabrik` SET `website`='[www.kalbefarma.co.id]' WHERE  id_pabrik=1;
+
+2. UPDATE `detail_transaksi` SET `harga`='[70000]' WHERE id_obat=8;
+
+3. UPDATE `detail_pabrik` SET `website`='[www.kimiafarma.co.id]' WHERE id_pabrik=2;
+
+4. DELETE FROM `transaksi` WHERE id=22;
+
+5. DELETE FROM `pabrik` WHERE id=11;
+>>>>>>> 7658bc6dd68588cbbf8f6a2b55414b292d6b8b1c
