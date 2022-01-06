@@ -1,0 +1,10 @@
+SELECT * FROM customer;
+SELECT * FROM obat;
+SELECT * FROM supplier;
+SELECT * FROM transactions;
+SELECT * FROM transactions WHERE cust_id = 6 or obat_id = 11;
+SELECT address FROM customer WHERE name = 'geri';
+SELECT address, phone FROM supplier WHERE name = 'kimia farma';
+SELECT name, stock, price FROM obat ORDER BY name ASC;
+SELECT * FROM transactions ORDER BY amount DESC;
+SELECT name AS 'Nama', address AS 'alamat' FROM customer WHERE id > 7 OR id < 4 ORDER BY name DESC;

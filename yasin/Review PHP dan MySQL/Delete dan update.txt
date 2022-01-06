@@ -1,0 +1,5 @@
+UPDATE obat SET symptoms = 'Luka' WHERE symptoms = 'Salep Luka';
+UPDATE obat SET symptoms = 'Suplemen' WHERE symptoms = 'Multivitamin';
+UPDATE customer SET address = 'Jalan Tikus' WHERE name = 'Yasin';
+DELETE FROM customer WHERE name = 'Yasin';
+DELETE FROM supplier WHERE name = 'Spell Factory';
