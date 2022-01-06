@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2022 at 02:58 AM
+-- Generation Time: Jan 06, 2022 at 01:42 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -63,7 +63,7 @@ CREATE TABLE `obat` (
   `information` text NOT NULL,
   `expired_at` datetime NOT NULL,
   `price` int(8) NOT NULL,
-  `supplier_id` int(5) NOT NULL
+  `supplier_id` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -80,15 +80,16 @@ INSERT INTO `obat` (`id`, `name`, `symptoms`, `stock`, `information`, `expired_a
 (10, 'VIDORAN', 'Suplemen', 555, 'Multivitamin, susu pertumbuhan anak dan susu Ibu hamil pertama dengan IMUN UP yang diperkaya Cod Liver Oil untuk membantu mengoptimalkan tumbuh kembang anak dan memenuhi kebutuhan nutrisi ibu hamil.', '2022-05-24 10:58:46', 13000, 4),
 (11, 'ORALIT', 'Sakit Perut', 2647, 'Tiap sachet mengandung :\r\n\r\nNatrium klorida 0,52 gram\r\nKalium klorida 0,30 gram\r\nTrisodium sitrat dihidrat 0,58 gram\r\nGlukosa anhidrat 2,7 gram\r\nDus, 100 sachet @ 4,1 gram', '2022-09-21 11:10:39', 2000, 7),
 (12, 'TOLAK ANGIN', 'Suplemen', 6574, 'Tolak Angin merupakan Obat Herbal Terstandar (OHT) yang diproduksi di pabrik yang terstandar GMP (Good Manufacturing Product), ISO (International Organization of Standardization), dan HACCP (Hazard Analysis Critical Control Point).  Tolak Angin telah melalui uji toksisitas subkronik dan uji khasiat yang terbukti memelihara/menjaga daya tahan tubuh dengan mengkonsumsi 2 sachet setiap hari selama 7 hari atau lebih.', '2022-09-15 11:10:39', 9000, 8),
-(13, 'Biovision', 'Suplemen', 2334, 'Biovision adalah obat suplemen mata produksi PT. Indofarma yang mengandung ekstrak Bilberry, Betakaroten, Vitamin C, dan Vitamin B2. Sel sel mata rentan terhadap kerusakan oleh radikal bebas seperti dari sinar ultraviolet matahari. Betakaroten dan ekstrak Bilberry dalam bentuk antosianosida merupakan antioksidan sehingga dapat membantu mencegah kerusakan mata akibat radikal bebas. Biovision diindikasikan untuk mencegah dan membantu pengobatan beberapa gangguan mata seperti buta senja, retinopati diabetik, degenerasi makula, glaukoma, dan katarak. Kandungan vitamin pada Biovision berfungsi menjaga asupan nutrisi ke mata dan memelihara kesehatan sel mata. Tidak ada kontraindikasi khusus terhadap obat ini. Penggunaan pada ibu hamil dan menyusui memerlukan konsultasi dengan dokter.', '2022-01-05 05:16:21', 25500, 9);
+(13, 'Biovision', 'Suplemen', 2334, 'Biovision adalah obat suplemen mata produksi PT. Indofarma yang mengandung ekstrak Bilberry, Betakaroten, Vitamin C, dan Vitamin B2. Sel sel mata rentan terhadap kerusakan oleh radikal bebas seperti dari sinar ultraviolet matahari. Betakaroten dan ekstrak Bilberry dalam bentuk antosianosida merupakan antioksidan sehingga dapat membantu mencegah kerusakan mata akibat radikal bebas. Biovision diindikasikan untuk mencegah dan membantu pengobatan beberapa gangguan mata seperti buta senja, retinopati diabetik, degenerasi makula, glaukoma, dan katarak. Kandungan vitamin pada Biovision berfungsi menjaga asupan nutrisi ke mata dan memelihara kesehatan sel mata. Tidak ada kontraindikasi khusus terhadap obat ini. Penggunaan pada ibu hamil dan menyusui memerlukan konsultasi dengan dokter.', '2022-01-05 05:16:21', 25500, 9),
+(15, 'Acetaminophen', 'demam', 6767, 'Obat ini dikenal juga sebagai paracetamol, gunanya untuk menurunkan suhu tubuh Anda yang naik akibat demam.', '2023-01-19 19:04:32', 90000, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `supplier`
+-- Table structure for table `produsen`
 --
 
-CREATE TABLE `supplier` (
+CREATE TABLE `produsen` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -96,10 +97,10 @@ CREATE TABLE `supplier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `supplier`
+-- Dumping data for table `produsen`
 --
 
-INSERT INTO `supplier` (`id`, `name`, `address`, `phone`) VALUES
+INSERT INTO `produsen` (`id`, `name`, `address`, `phone`) VALUES
 (1, 'PT. Kalbe Farma Tbk (KLBF)', 'Gedung KALBE, Jl. Let. Jend Suprapto Kav 4 Jakarta 1051, Indonesia', '6221-42873888-89'),
 (3, 'Hansaplast Indonesia', 'Gedung Ratu Prabu 2, Lantai 5 Jl. T.B. Simatupang Kav 1B RT.3, RT.1/RW.3, Cilandak Tim., Kec. Ps. Mi', '0800 1164832'),
 (4, 'Tempo Scan Group', 'PT Tempo Scan Pacific Tbk. Tempo Scan Tower, 16th Floor Jl. HR. Rasuna Said Kav. 3-4, Jakarta 12950.', '(62-21) 2921-8888'),
@@ -154,9 +155,9 @@ ALTER TABLE `obat`
   ADD KEY `fk_supplier` (`supplier_id`);
 
 --
--- Indexes for table `supplier`
+-- Indexes for table `produsen`
 --
-ALTER TABLE `supplier`
+ALTER TABLE `produsen`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -181,12 +182,12 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `supplier`
+-- AUTO_INCREMENT for table `produsen`
 --
-ALTER TABLE `supplier`
+ALTER TABLE `produsen`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
@@ -203,7 +204,7 @@ ALTER TABLE `transactions`
 -- Constraints for table `obat`
 --
 ALTER TABLE `obat`
-  ADD CONSTRAINT `fk_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`);
+  ADD CONSTRAINT `fk_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `produsen` (`id`);
 
 --
 -- Constraints for table `transactions`
