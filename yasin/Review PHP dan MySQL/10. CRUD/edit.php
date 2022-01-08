@@ -7,10 +7,10 @@
 	include_once("connect.php");
 	$isbn = $_GET['isbn'];
 
-	$buku = mysqli_query($mysqli, "SELECT * FROM buku WHERE isbn='$isbn'");
-    $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit");
-    $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarang");
-    $katalog = mysqli_query($mysqli, "SELECT * FROM katalog");
+	$buku = mysqli_query($mysqli, "SELECT * FROM bukus WHERE isbn='$isbn'");
+    $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbits");
+    $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarangs");
+    $katalog = mysqli_query($mysqli, "SELECT * FROM katalogs");
 
     while($buku_data = mysqli_fetch_array($buku))
     {
@@ -49,7 +49,7 @@
 					<select name="id_penerbit">
 						<?php 
 						    while($penerbit_data = mysqli_fetch_array($penerbit)) {         
-						    	echo "<option ".($penerbit_data['id_penerbit'] == $id_penerbit ? 'selected' : '')." value='".$penerbit_data['id_penerbit']."'>".$penerbit_data['nama_penerbit']."</option>";
+						    	echo "<option ".($penerbit_data['id'] == $id_penerbit ? 'selected' : '')." value='".$penerbit_data['id']."'>".$penerbit_data['nama_penerbit']."</option>";
 						    }
 						?>
 					</select>
@@ -61,7 +61,7 @@
 					<select name="id_pengarang">
 						<?php 
 						    while($pengarang_data = mysqli_fetch_array($pengarang)) {         
-						    	echo "<option ".($pengarang_data['id_pengarang'] == $id_pengarang ? 'selected' : '')." value='".$pengarang_data['id_pengarang']."'>".$pengarang_data['nama_pengarang']."</option>";
+						    	echo "<option ".($pengarang_data['id'] == $id_pengarang ? 'selected' : '')." value='".$pengarang_data['id']."'>".$pengarang_data['nama_pengarang']."</option>";
 						    }
 						?>
 					</select>
@@ -73,7 +73,7 @@
 					<select name="id_katalog">
 						<?php 
 						    while($katalog_data = mysqli_fetch_array($katalog)) {         
-						    	echo "<option ".($katalog_data['id_katalog'] == $id_katalog ? 'selected' : '')." value='".$katalog_data['id_katalog']."'>".$katalog_data['nama']."</option>";
+						    	echo "<option ".($katalog_data['id'] == $id_katalog ? 'selected' : '')." value='".$katalog_data['id']."'>".$katalog_data['nama']."</option>";
 						    }
 						?>
 					</select>
@@ -110,7 +110,7 @@
 			
 			include_once("connect.php");
 
-			$result = mysqli_query($mysqli, "UPDATE buku SET judul = '$judul', tahun = '$tahun', id_penerbit = '$id_penerbit', id_pengarang = '$id_pengarang', id_katalog = '$id_katalog', qty_stok = '$qty_stok', harga_pinjam = '$harga_pinjam' WHERE isbn = '$isbn';");
+			$result = mysqli_query($mysqli, "UPDATE bukus SET judul = '$judul', tahun = '$tahun', id_penerbit = '$id_penerbit', id_pengarang = '$id_pengarang', id_katalog = '$id_katalog', qty_stok = '$qty_stok', harga_pinjam = '$harga_pinjam' WHERE isbn = '$isbn';");
 			
 			header("Location:index.php");
 		}

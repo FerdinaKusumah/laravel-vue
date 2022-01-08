@@ -1,6 +1,6 @@
 <?php
     include_once("connect.php");
-    $bukus = mysqli_query($mysqli, "SELECT bukus.*, nama_pengarang, nama_penerbit, katalogs.nama as nama_katalog FROM bukus 
+    $buku = mysqli_query($mysqli, "SELECT bukus.*, nama_pengarang, nama_penerbit, katalogs.nama as nama_katalog FROM bukus 
                                         LEFT JOIN  pengarangs ON pengarangs.id = bukus.id_pengarang
                                         LEFT JOIN  penerbits ON penerbits.id = bukus.id_penerbit
                                         LEFT JOIN  katalogs ON katalogs.id = bukus.id_katalog
@@ -18,9 +18,9 @@
 
 <center>
     <a href="index.php">Buku</a> |
-    <a href="#">Penerbit</a> |
-    <a href="#">Pengarang</a> |
-    <a href="#">Katalog</a>
+    <a href="penerbit/index.php">Penerbit</a> |
+    <a href="pengarang/index.php">Pengarang</a> |
+    <a href="katalog/index.php">Katalog</a>
     <hr>
 </center>
 
@@ -40,7 +40,7 @@
         <th>Aksi</th>
     </tr>
     <?php  
-        while($buku_data = mysqli_fetch_array($bukus)) {         
+        while($buku_data = mysqli_fetch_array($buku)) {         
             echo "<tr>";
             echo "<td>".$buku_data['isbn']."</td>";
             echo "<td>".$buku_data['judul']."</td>";

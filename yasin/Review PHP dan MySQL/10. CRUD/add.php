@@ -5,9 +5,9 @@
 
 <?php
 	include_once("connect.php");
-    $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit");
-    $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarang");
-    $katalog = mysqli_query($mysqli, "SELECT * FROM katalog");
+    $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbits");
+    $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarangs");
+    $katalog = mysqli_query($mysqli, "SELECT * FROM katalogs");
 ?>
  
 <body>
@@ -34,7 +34,7 @@
 					<select name="id_penerbit">
 						<?php 
 						    while($penerbit_data = mysqli_fetch_array($penerbit)) {         
-						    	echo "<option value='".$penerbit_data['id_penerbit']."'>".$penerbit_data['nama_penerbit']."</option>";
+						    	echo "<option value='".$penerbit_data['id']."'>".$penerbit_data['nama_penerbit']."</option>";
 						    }
 						?>
 					</select>
@@ -46,7 +46,7 @@
 					<select name="id_pengarang">
 						<?php 
 						    while($pengarang_data = mysqli_fetch_array($pengarang)) {         
-						    	echo "<option value='".$pengarang_data['id_pengarang']."'>".$pengarang_data['nama_pengarang']."</option>";
+						    	echo "<option value='".$pengarang_data['id']."'>".$pengarang_data['nama_pengarang']."</option>";
 						    }
 						?>
 					</select>
@@ -58,7 +58,7 @@
 					<select name="id_katalog">
 						<?php 
 						    while($katalog_data = mysqli_fetch_array($katalog)) {         
-						    	echo "<option value='".$katalog_data['id_katalog']."'>".$katalog_data['nama']."</option>";
+						    	echo "<option value='".$katalog_data['id']."'>".$katalog_data['nama']."</option>";
 						    }
 						?>
 					</select>
@@ -94,7 +94,7 @@
 			
 			include_once("connect.php");
 
-			$result = mysqli_query($mysqli, "INSERT INTO `buku` (`isbn`, `judul`, `tahun`, `id_penerbit`, `id_pengarang`, `id_katalog`, `qty_stok`, `harga_pinjam`) VALUES ('$isbn', '$judul', '$tahun', '$id_penerbit', '$id_pengarang', '$id_katalog', '$qty_stok', '$harga_pinjam');");
+			$result = mysqli_query($mysqli, "INSERT INTO `bukus` (`isbn`, `judul`, `tahun`, `id_penerbit`, `id_pengarang`, `id_katalog`, `qty_stok`, `harga_pinjam`) VALUES ('$isbn', '$judul', '$tahun', '$id_penerbit', '$id_pengarang', '$id_katalog', '$qty_stok', '$harga_pinjam');");
 			
 			header("Location:index.php");
 		}
