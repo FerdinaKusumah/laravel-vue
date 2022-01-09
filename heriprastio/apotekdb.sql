@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jan 2022 pada 11.34
+-- Waktu pembuatan: 09 Jan 2022 pada 16.40
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.34
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db-apotek`
+-- Database: `apotekdb`
 --
 
 -- --------------------------------------------------------
@@ -29,10 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `penyedia_obat` (
   `id` int(11) NOT NULL,
-  `nama_supplier_obat` varchar(30) NOT NULL,
-  `alamat` text NOT NULL,
-  `telp` varchar(15) NOT NULL
+  `nama_perusahaan_penyedia_obat` varchar(20) DEFAULT NULL,
+  `alamat_perusahaan` text DEFAULT NULL,
+  `telepon` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `penyedia_obat`
+--
+
+INSERT INTO `penyedia_obat` (`id`, `nama_perusahaan_penyedia_obat`, `alamat_perusahaan`, `telepon`) VALUES
+(1, 'Kimia Farna', 'Jl. Data Kimia', '0892111'),
+(2, 'Sido', 'Jl. Muncul', '08123');
 
 -- --------------------------------------------------------
 
@@ -42,9 +50,19 @@ CREATE TABLE `penyedia_obat` (
 
 CREATE TABLE `persediaan_obat` (
   `id` int(11) NOT NULL,
-  `nama_obat` varchar(45) NOT NULL,
-  `jumlah` int(11) NOT NULL
+  `nama_obat` varchar(45) DEFAULT NULL,
+  `jenis_obat` varchar(25) DEFAULT NULL,
+  `jumlah_obat` int(11) DEFAULT NULL,
+  `id_penyedia_obat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `persediaan_obat`
+--
+
+INSERT INTO `persediaan_obat` (`id`, `nama_obat`, `jenis_obat`, `jumlah_obat`, `id_penyedia_obat`) VALUES
+(1, 'Promag', 'Seduh', 10, 1),
+(2, 'Tolak Linu', 'Cair', 2, 2);
 
 --
 -- Indexes for dumped tables
@@ -60,7 +78,8 @@ ALTER TABLE `penyedia_obat`
 -- Indeks untuk tabel `persediaan_obat`
 --
 ALTER TABLE `persediaan_obat`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_penyedia_obat` (`id_penyedia_obat`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -70,13 +89,13 @@ ALTER TABLE `persediaan_obat`
 -- AUTO_INCREMENT untuk tabel `penyedia_obat`
 --
 ALTER TABLE `penyedia_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `persediaan_obat`
 --
 ALTER TABLE `persediaan_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -86,7 +105,7 @@ ALTER TABLE `persediaan_obat`
 -- Ketidakleluasaan untuk tabel `persediaan_obat`
 --
 ALTER TABLE `persediaan_obat`
-  ADD CONSTRAINT `fk_penyedia_obat` FOREIGN KEY (`id`) REFERENCES `penyedia_obat` (`id`);
+  ADD CONSTRAINT `fk_id_penyedia_obat` FOREIGN KEY (`id_penyedia_obat`) REFERENCES `penyedia_obat` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
