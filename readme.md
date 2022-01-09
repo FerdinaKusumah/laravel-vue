@@ -1,6 +1,3 @@
-## Laravel Vue Js
----
-
 * create task message
     * description: 
         * changes file 1
@@ -13,17 +10,16 @@
         * home.html
 
 * branch name convention
-  do:
-    - feature/branchName -> camelCase
-    - feature/branch-name -> dash | hypen
-    - feature/branch_name -> snake case
-      -> update -> tambah feature
+  * do:
+    * feature/branchName -> camelCase
+    * feature/branch-name -> dash | hypen
+    * feature/branch_name -> snake case
         -> feature/fooBar
         -> bugFix/fooBar
         -> hotFix/fooBar
-  dont:
-    - feature_branch+name
-    - feature branch name
-    - feature_branch_name_
-    - _feature_branch_name
+  * dont:
+    * feature_branch+name
+    * feature branch name
+    * feature_branch_name_
+    * _feature_branch_name
 
