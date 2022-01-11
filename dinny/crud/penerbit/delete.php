@@ -1,9 +1,9 @@
 <?php
 	include_once("connect.php");
 
-	$isbn = $_GET['isbn'];
+	$nama_penerbit = $_GET['nama_penerbit'];
 
-	$result = mysqli_query($conn, "DELETE FROM bukus WHERE isbn='$isbn'");
+	$result = mysqli_query($conn, "DELETE FROM penerbits WHERE nama_penerbit='$nama_penerbit'");
 
 	// After delete redirect to Home, so that latest user list will be displayed.
 	header("Location:index.php");

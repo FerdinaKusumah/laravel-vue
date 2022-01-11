@@ -1,9 +1,9 @@
 <?php
 	include_once("connect.php");
-	$buku = mysqli_query($mysqli, "SELECT bukus. * , nama_pengarang, nama_penerbit, katalogs.nama as nama_katalog FROM bukus
-		LEFT JOIN pengarangs ON pengarangs.id_pengarang = bukus.id_pengarang
-		LEFT JOIN penerbits ON penerbits.id_penerbit = bukus.id_penerbit
-		LEFT JOIN katalogs ON katalogs.id_katalog = bukus.id_katalog
+	$buku = mysqli_query($conn, "SELECT bukus. * , nama_pengarang, nama_penerbit, katalogs.nama as nama_katalog FROM bukus
+		LEFT JOIN pengarangs ON pengarangs.id = bukus.id_pengarang
+		LEFT JOIN penerbits ON penerbits.id = bukus.id_penerbit
+		LEFT JOIN katalogs ON katalogs.id = bukus.id_katalog
 		ORDER BY judul ASC");
 ?>
 
@@ -35,17 +35,17 @@
 			<td>Aksi</td>
 		</tr>
 		<?php
-			while($bukus = mysqli_array($buku)){
+			while($buku_data = mysqli_fetch_array($buku)){
 				echo "<tr>";
-				echo "<td>".$bukus['isbn']. "</td>";
-				echo "<td>".$bukus['judul']. "</td>";
-				echo "<td>".$bukus['tahun']. "</td>";
-				echo "<td>".$bukus['nama_pengarang']. "</td>";
-				echo "<td>".$bukus['nama_penerbit']. "</td>";
-				echo "<td>".$bukus['nama_katalog']. "</td>";
-				echo "<td>".$bukus['qty_stok']. "</td>";
-				echo "<td>".$bukus['harga_pinjam']. "</td>";
-				echo "<td><a href='edit.php?>isbn=$bukus[isbn]'>Edit</a> | <a href='delete.php?isbn=$bukus[isbn]'>Delete</a></td></tr>";
+				echo "<td>".$buku_data['isbn']. "</td>";
+				echo "<td>".$buku_data['judul']. "</td>";
+				echo "<td>".$buku_data['tahun']. "</td>";
+				echo "<td>".$buku_data['nama_pengarang']. "</td>";
+				echo "<td>".$buku_data['nama_penerbit']. "</td>";
+				echo "<td>".$buku_data['nama_katalog']. "</td>";
+				echo "<td>".$buku_data['qty_stok']. "</td>";
+				echo "<td>".$buku_data['harga_pinjam']. "</td>";
+				echo "<td><a href='edit.php?>isbn=$buku_data[isbn]'>Edit</a> | <a class='btn btn-dager' href='delete.php?isbn=$buku_data[isbn]'>Delete</a></td></tr>";
 			}
 		?>
 	</table>
