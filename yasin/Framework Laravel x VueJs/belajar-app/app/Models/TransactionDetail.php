@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class TransactionDetail extends Model
 {
     use HasFactory;
+
+    public function transactions(){
+        return $this->hasOne('App\Models\Transaction', 'id');
+    }
+
+    public function books(){
+        return $this->belongsTo('App\Models\Book', 'book_id');
+    }
 }
