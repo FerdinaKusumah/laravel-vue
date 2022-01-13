@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2022 at 09:43 AM
+-- Generation Time: Jan 13, 2022 at 12:56 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -74,7 +74,7 @@ CREATE TABLE `books` (
   `isbn` int(11) NOT NULL,
   `title` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `year` int(11) NOT NULL,
-  `publisher_id` bigint(20) UNSIGNED NOT NULL,
+  `publisher_id` bigint(20) UNSIGNED DEFAULT NULL,
   `author_id` bigint(20) UNSIGNED NOT NULL,
   `catalog_id` bigint(20) UNSIGNED NOT NULL,
   `qty` int(11) NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `isbn`, `title`, `year`, `publisher_id`, `author_id`, `catalog_id`, `qty`, `price`, `created_at`, `updated_at`) VALUES
-(23, 620682207, 'Buku Optio quo dolor illum eveniet.', 2010, 8, 1, 3, 19, 18363, '2022-01-11 01:27:18', '2022-01-11 01:27:18'),
+(23, 620682207, 'Buku Optio quo dolor illum eveniet.', 2010, 8, 1, 3, 19, 8363, '2022-01-11 01:27:18', '2022-01-11 01:27:18'),
 (24, 260681038, 'Buku Labore et cumque similique odit beatae ipsa id.', 2014, 2, 10, 4, 17, 18267, '2022-01-11 01:27:55', '2022-01-11 01:27:55'),
 (25, 449471111, 'Buku Quaerat nobis deleniti optio placeat amet deserunt dolores.', 2011, 14, 15, 7, 16, 15094, '2022-01-11 01:27:55', '2022-01-11 01:27:55'),
 (26, 32540051, 'Buku Rem non iure consequatur quos dolore rerum corrupti.', 2021, 17, 20, 6, 20, 12002, '2022-01-11 01:27:55', '2022-01-11 01:27:55'),
@@ -98,7 +98,7 @@ INSERT INTO `books` (`id`, `isbn`, `title`, `year`, `publisher_id`, `author_id`,
 (30, 213717671, 'Buku Repellat fuga molestias officiis.', 2014, 4, 3, 6, 16, 15872, '2022-01-11 01:27:55', '2022-01-11 01:27:55'),
 (31, 54046550, 'Buku Nihil enim modi dolores voluptas porro suscipit amet.', 2015, 17, 17, 7, 11, 10448, '2022-01-11 01:27:55', '2022-01-11 01:27:55'),
 (32, 930604723, 'Tutorial minima', 2017, 7, 10, 5, 19, 15870, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
-(33, 77466723, 'Tutorial eos', 2020, 16, 4, 4, 15, 19492, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
+(33, 77466723, 'Tutorial eos', 2020, 16, 4, 4, 15, 9492, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
 (34, 397279573, 'Tutorial perferendis', 2018, 17, 12, 4, 19, 17775, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
 (35, 493479562, 'Tutorial aut', 2020, 10, 11, 2, 12, 11834, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
 (36, 937650572, 'Tutorial eligendi', 2016, 1, 19, 3, 20, 14905, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
@@ -116,7 +116,8 @@ INSERT INTO `books` (`id`, `isbn`, `title`, `year`, `publisher_id`, `author_id`,
 (48, 659816969, 'Tutorial sunt', 2021, 10, 5, 1, 20, 11037, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
 (49, 582226325, 'Tutorial cum', 2018, 20, 5, 2, 19, 16985, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
 (50, 330072294, 'Tutorial cum', 2014, 2, 19, 2, 16, 18131, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
-(51, 673741867, 'Tutorial consequuntur', 2014, 2, 12, 3, 12, 17176, '2022-01-11 01:28:51', '2022-01-11 01:28:51');
+(51, 673741867, 'Tutorial consequuntur', 2014, 2, 12, 3, 12, 17176, '2022-01-11 01:28:51', '2022-01-11 01:28:51'),
+(52, 913748, 'Coabbabbabababa', 1992, NULL, 11, 3, 12, 7000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,21 +188,23 @@ INSERT INTO `members` (`id`, `name`, `gender`, `phone_number`, `address`, `email
 (3, 'Daisha Gulgowski', 'f', '082122175324', '523 Schuster Walk Suite 688\nAlycemouth, NH 96237-3926', 'renner.lukas@johnson.org', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
 (4, 'Gunner Abshire', 'f', '082188019117', '52524 West Pines\nLake Abelardo, SC 71577', 'daugherty.nikolas@hotmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
 (5, 'Norberto Harris', 'f', '082111133689', '6008 Augustine Club Suite 946\nNorth Rowan, AK 71186', 'kling.rosina@russel.biz', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
-(6, 'Arthur Osinski', 'm', '082133163733', '64784 Bins Greens\nFaystad, TX 97418', 'toni.oconnell@hotmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
-(7, 'Sheila Kshlerin', 'f', '082146667966', '214 Hegmann Common Suite 747\nNew Roxane, KY 09620', 'okeefe.ebony@gmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
+(6, 'Arthur Osinski', 'm', '082133163733', 'Bandung ajah', 'toni.oconnell@hotmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
+(7, 'Sheila Kshlerin', 'f', '082146667966', 'Bandung biru', 'okeefe.ebony@gmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
 (8, 'Abel Anderson', 'f', '082130778573', '5970 Zulauf Alley\nSouth Grayson, NC 70536', 'hleuschke@hotmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
-(9, 'Lorenza Gutmann DDS', 'm', '082141507779', '3800 Tyson Field Apt. 152\nTomasashire, KY 28140-2159', 'amir75@yahoo.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
+(9, 'Lorenza Gutmann DDS', 'm', '082141507779', '3800 Tyson Field Apt. 152\nTomasashire, KY 28140-2159', 'amir75@yahoo.com', '2021-06-16 01:43:16', '2022-01-11 01:43:16'),
 (10, 'Jefferey Schoen II', 'm', '082143985326', '27166 Erik Crest Suite 937\nCasimirland, VA 94139-6964', 'drake.smitham@yahoo.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
 (11, 'Prof. Sim Kuvalis MD', 'm', '082124448438', '233 Daryl Shoal Suite 429\nEast Kasey, WI 19456-2064', 'mhackett@hotmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
-(12, 'Dr. Deangelo Kuvalis III', 'f', '08214637679', '19495 Emelie Bridge Apt. 052\nGloverbury, NJ 93813', 'keagan.hammes@gmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
+(12, 'Dr. Deangelo Kuvalis III', 'f', '08214637679', '19495 Emelie Bridge Apt. 052\nGloverbury, NJ 93813', 'keagan.hammes@gmail.com', '2021-06-21 01:43:16', '2022-01-11 01:43:16'),
 (13, 'Dr. Humberto Stanton MD', 'f', '082182813137', '997 Johathan Burgs\nBarrowsside, KS 25632', 'hayden37@dickens.biz', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
 (14, 'Allene Mertz', 'f', '082133124896', '61194 Nikolaus Club\nLake Lorenzoborough, OK 28508-1241', 'harvey.michael@schumm.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
 (15, 'Amya Ward', 'm', '082194812605', '28241 Wilbert Glen Apt. 370\nSchmidttown, MS 69792', 'amelia.schulist@effertz.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
 (16, 'Mr. Lula Hansen Sr.', 'm', '082150710305', '182 Wisoky Square\nNorth Claudiamouth, ND 54194', 'patricia.macejkovic@gmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
 (17, 'Addie Ernser', 'f', '082182143428', '997 Novella Drive\nHermistonborough, WY 09462-5720', 'rickie.stiedemann@rutherford.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
-(18, 'Kelsie Herzog', 'f', '082172998410', '958 Annabel Fall\nEast Misael, MO 84645-5251', 'kuhn.louisa@gmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
+(18, 'Kelsie Herzog', 'f', '082172998410', '958 Annabel Fall\nEast Misael, MO 84645-5251', 'kuhn.louisa@gmail.com', '2021-06-16 01:43:16', '2022-01-11 01:43:16'),
 (19, 'Chadrick Kautzer', 'f', '082153359648', '65769 Schuppe Pass Apt. 754\nCummeratatown, MD 78350', 'hudson.reinhold@pagac.net', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
-(20, 'Mrs. Ella Padberg', 'm', '082197238351', '894 Spencer Route Apt. 689\nNorth Rebeka, MI 87261', 'brianne52@gmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16');
+(20, 'Mrs. Ella Padberg', 'm', '082197238351', '894 Spencer Route Apt. 689\nNorth Rebeka, MI 87261', 'brianne52@gmail.com', '2022-01-11 01:43:16', '2022-01-11 01:43:16'),
+(21, 'Mimin', 'F', '08888888', 'Jalan kenangan', 'admin@gmail.com', NULL, NULL),
+(22, 'Yasin', 'M', '08888888', 'Jalan Kebenaran', 'admin@library.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,7 +233,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2022_01_11_063334_create_catalogs_table', 1),
 (9, '2022_01_11_063353_create_books_table', 1),
 (10, '2022_01_11_063418_create_transactions_table', 1),
-(11, '2022_01_11_063440_create_transaction_details_table', 1);
+(11, '2022_01_11_063440_create_transaction_details_table', 1),
+(12, '2022_01_13_054848_create_admins_table', 2);
 
 -- --------------------------------------------------------
 
@@ -319,6 +323,17 @@ CREATE TABLE `transactions` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `member_id`, `date_start`, `date_end`, `created_at`, `updated_at`) VALUES
+(1, 8, '2021-05-30', '2021-06-03', NULL, NULL),
+(2, 6, '2021-06-14', '2021-06-16', NULL, NULL),
+(3, 8, '2021-06-30', '2021-07-07', NULL, NULL),
+(4, 8, '2021-06-30', '2022-01-14', NULL, NULL),
+(5, 7, '2021-06-30', '2022-01-13', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -333,6 +348,17 @@ CREATE TABLE `transaction_details` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaction_details`
+--
+
+INSERT INTO `transaction_details` (`id`, `transaction_id`, `book_id`, `qty`, `created_at`, `updated_at`) VALUES
+(1, 2, 24, 7, NULL, NULL),
+(2, 1, 29, 1, NULL, NULL),
+(3, 3, 24, 5, NULL, NULL),
+(4, 4, 27, 2, NULL, NULL),
+(5, 5, 31, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -357,7 +383,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `member_id`, `created_at`, `updated_at`) VALUES
-(1, 'Coba DB', 'cobadb@gmail.com', NULL, '$2y$10$L2IPAF/DjQ6FKsQdAAJM9Oaxbfcsw.SNBTTKuMkWJce7yN10.3REO', NULL, NULL, '2022-01-11 00:17:03', '2022-01-11 00:17:03');
+(1, 'Coba DB', 'cobadb@gmail.com', NULL, '$2y$10$L2IPAF/DjQ6FKsQdAAJM9Oaxbfcsw.SNBTTKuMkWJce7yN10.3REO', NULL, 1, '2022-01-11 00:17:03', '2022-01-11 00:17:03');
 
 --
 -- Indexes for dumped tables
@@ -460,7 +486,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `catalogs`
@@ -478,13 +504,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -502,13 +528,13 @@ ALTER TABLE `publishers`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `transaction_details`
 --
 ALTER TABLE `transaction_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
