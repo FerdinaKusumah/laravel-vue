@@ -13,8 +13,10 @@ class AuthorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('admin.author.index');
+    {   
+        $authors = Author::with('books')->paginate(5);
+
+        return view('admin.author.index', compact('authors'));
     }
 
     /**
