@@ -26,6 +26,9 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
+  <!-- <link rel="stylesheet" href="{{ asset('assets/AdminLTE 2 _ Simple Tables_files/AdminLTE.min.css') }}"> -->
+  <!-- <link rel="stylesheet" href="{{ asset('assets/AdminLTE 2 _ Simple Tables_files/font-awesome.min.css') }}"> -->
+  <!-- <link rel="stylesheet" href="{{ asset('assets/AdminLTE 2 _ Simple Tables_files/ionicons.min.css') }}"> -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -156,7 +159,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('author') }}" class="nav-link {{ request()->is('author') ? 'active' : '' }}">
+            <a href="{{ url('authors') }}" class="nav-link {{ request()->is('authors') ? 'active' : '' }}">
               <i class="nav-icon fas fa-marker"></i>
               <p>
                 Author
@@ -164,7 +167,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
+            <a href="{{ url('books') }}" class="nav-link {{ request()->is('books') ? 'active' : '' }}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Book
@@ -172,7 +175,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('catalog') }}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
+            <a href="{{ url('catalogs') }}" class="nav-link {{ request()->is('catalogs') ? 'active' : '' }}">
               <i class="nav-icon fas fa-list"></i>
               <p>
                 Catalog
@@ -180,7 +183,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('member') }}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
+            <a href="{{ url('members') }}" class="nav-link {{ request()->is('members') ? 'active' : '' }}">
               <i class="nav-icon fas fa-user-friends"></i>
               <p>
                 Member
@@ -188,7 +191,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('publisher') }}" class="nav-link {{ request()->is('publisher') ? 'active' : '' }}">
+            <a href="{{ url('publishers') }}" class="nav-link {{ request()->is('publishers') ? 'active' : '' }}">
               <i class="nav-icon fas fa-building"></i>
               <p>
                 Publisher
@@ -214,12 +217,13 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-
+    
     <section class="content">
       <div class="container-fluid">
         @yield('content')
-        </div><!-- /.container-fluid -->
+      </div>
     </section>
+
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
