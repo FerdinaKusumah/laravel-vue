@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     use HasFactory;
+
+    public function user()
+    {
+        return $this-> hasOne('app\Models\User', 'member_id');
+    }
 }
