@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
+    
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        $catalogs = Catalog::with('books')->paginate(5)->withQueryString();
+        $catalogs = Catalog::with('books')->get();
         // return $catalogs;
         return view('admin.catalog.index', compact('catalogs'));
     }
@@ -41,10 +46,6 @@ class CatalogController extends Controller
             'name'  => ['required'],
         ]);
 
-        // $catalog = new Catalog;
-        // $catalog->name = $request->name;
-        // $catalog->save();
-        
         Catalog::create($request->all());
 
         return redirect('catalogs');

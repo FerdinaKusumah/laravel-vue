@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PublisherController extends Controller
 {
+    
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +19,9 @@ class PublisherController extends Controller
      */
     public function index()
     {   
-        $publishers = Publisher::with('books')->paginate(5);
+        $publishers = Publisher::with('books')->get();
 
-        return view('admin.publisher.index', compact('publishers'));
+        return view('admin.publisher.index',  compact('publishers'));
     }
 
     /**
@@ -26,7 +31,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view('admin.publisher.create');
+        // return view('admin.publisher.index');
     }
 
     /**
@@ -40,17 +45,14 @@ class PublisherController extends Controller
         $this->validate($request, [
             'name'  => ['required'],
             'email'  => ['required', 'email'],
-            'phone_number'  => ['required', 'numeric', 'min:10', 'max:13'],
+            'phone_number'  => ['required', 'numeric', 'digits_between:10,13'],
             'address'  => ['required'],
         ]);
-
-        // $publisher = new Publisher;
-        // $publisher->name = $request->name;
-        // $publisher->save();
         
         Publisher::create($request->all());
 
         return redirect('publishers');
+        // return $request;
     }
 
     /**
@@ -72,7 +74,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        return view('admin.publisher.edit', compact('publisher'));
+        // return view('admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -105,7 +107,5 @@ class PublisherController extends Controller
     public function destroy(Publisher $publisher)
     {
         $publisher->delete();
-
-        return redirect('publishers');
     }
 }

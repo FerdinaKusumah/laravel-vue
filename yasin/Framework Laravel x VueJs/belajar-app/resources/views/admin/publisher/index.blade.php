@@ -1,63 +1,163 @@
 @extends('layouts.admin')
 @section('header', 'Publisher')
 
+@section('css')
+
+@endsection
+
 @section('content')
+
+<div id="controller">
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col">
+          <div class="col-md">
             <div class="card">
-              <div class="card-header">
-                <a href="{{ url('publishers/create') }}" class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                        <th class="text-center align-middle">No</th>
-                        <th class="text-center align-middle">Name</th>
-                        <th class="text-center align-middle">Email</th>
-                        <th class="text-center align-middle">Phone Number</th>
-                        <th class="text-center align-middle">Address</th>
-                        <th class="text-center align-middle">Total Buku</th>
-                        <th class="text-center align-middle">Created_at</th>
-                        <th class="text-center align-middle">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($publishers as $key => $publisher)
-                    <tr>
-                        <td class="text-center align-middle">{{ $key+1 }}</td>
-                        <td class="text-center align-middle"> {{ $publisher->name }} </td>
-                        <td class="text-center align-middle"> {{ $publisher->email }} </td>
-                        <td class="text-center align-middle"> {{ $publisher->phone_number }} </td>
-                        <td class="text-center align-middle"> {{ $publisher->address }} </td>
-                        <td class="text-center align-middle"> {{ count($publisher->books) }} </td>
-                        <td class="text-center align-middle">{{ date('d-M-Y', strtotime( $publisher->created_at )) }}</td>
-                        <td class="text-center align-middle">
-                          <a href="{{ url('publishers/'.$publisher->id.'/edit') }}" class="btn btn-warning btn-sm mb-2"> Edit </a>
-                          <form action="{{ url('publishers', ['id' => $publisher->id]) }}" method="post">
-                            <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="
-                            return confirm('Are You sure wanna delete this?')">
-                            @method('delete')
-                            @csrf
-                          </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-                <!-- /.card-body -->
-                <div class="d-flex justify-content-end mt-2">
-                {{ $publishers->links() }}
+                <div class="card-header">
+                    <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
+                <!-- <a href="{{ url('authors/create') }}" class="btn btn-sm btn-primary pull-right">Create New Author</a> -->
                 </div>
+              <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                            <th class="text-center align-middle">No</th>
+                                <th class="text-center align-middle">Name</th>
+                                <th class="text-center align-middle">Email</th>
+                                <th class="text-center align-middle">Phone Number</th>
+                                <th class="text-center align-middle">Address</th>
+                                <!-- <th class="text-center align-middle">Total Buku</th>
+                                <th class="text-center align-middle">Created_at</th> -->
+                                <th width="15%" class="text-center align-middle">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($publishers as $key => $publisher)
+                            <tr>
+                            <td class="text-center align-middle">{{ $key+1 }}</td>
+                                <td class="text-center align-middle"> {{ $publisher->name }} </td>
+                                <td class="text-center align-middle"> {{ $publisher->email }} </td>
+                                <td class="text-center align-middle"> {{ $publisher->phone_number }} </td>
+                                <td class="text-center align-middle"> {{ $publisher->address }} </td>
+                                <!-- <td class="text-center align-middle"> {{ count($publisher->books) }} </td>
+                                <td class="text-center align-middle">{{ date('d-M-Y', strtotime( $publisher->created_at )) }}</td> -->
+                                <td class="text-center align-middle">
+                                <!-- <a href="{{ url('publishers/'.$publisher->id.'/edit') }}" class="btn btn-warning btn-sm mb-2"> Edit </a>
+                                <form action="{{ url('publishers', ['id' => $publisher->id]) }}" method="post">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="
+                                    return confirm('Are You sure wanna delete this?')">
+                                    @method('delete')
+                                    @csrf
+                                </form> -->
+                                    <a href="#" @click="editData({{ $publisher }})" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="#" @click="deleteData({{ $publisher->id }})" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                <!-- /.card-body -->
               </div>
-                <!-- /.card -->
-            </div>
-          </div>
-        </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" :action="actionUrl" autocomplete="off">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Publisher</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+
+                        <input type="hidden" name="_method" value="PUT" v-if="editStatus">
+
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" :value="data.name" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="email" class="form-control" :value="data.email" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" name="phone_number" class="form-control" :value="data.phone_number" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" name="address" class="form-control" :value="data.address" required="">
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+@endsection
+
+@section('js')
+
+    <script type="text/javascript">
+        var controller = new Vue({
+            el: '#controller',
+            data: {
+                data: {},
+                actionUrl : '{{ url('publishers') }}', 
+                editStatus : false
+            },
+            mounted: function() {
+
+            },
+            methods: {
+                addData() {
+                    this.data = {};
+                    this.actionUrl = '{{ url('publishers') }}';
+                    this.editStatus = false;
+                    $('#modal-default ').modal();
+                }, 
+                editData(data){
+                    this.data = data;
+                    this.actionUrl = '{{ url('publishers') }}'+'/'+data.id;
+                    this.editStatus = true;
+                    $('#modal-default ').modal();
+                },
+                deleteData(id){
+                    this.actionUrl = '{{ url('publishers') }}'+'/'+id;
+                    
+                    if (confirm("Are You sure wanna delete this?")) {
+                        axios.post('{{ url('publishers') }}'+'/'+id, {_method: 'DELETE'}).then(response =>{
+                            location.reload();
+                        });
+                        // axios.delete(this.actionURL).then(response => {
+                        //     console.log(response);
+                        // });
+
+                        // axios.delete('{{ url('publishers') }}'+'/'+id)
+                        // .then(response => {
+                        //     location.reload();
+                        //     console.log();
+                        // })
+                        // .catch(function (error) {
+                        //     console.log(error.response)
+                        // })
+                    }
+                }
+            }
+        });
+    </script>
+
 @endsection
