@@ -20,7 +20,7 @@ class PublisherController extends Controller
      */
     public function index()
     {   
-        return view('admin.publisher.index');
+        return view('admin.publisher');
     }
 
     public function api ()
@@ -59,7 +59,6 @@ class PublisherController extends Controller
         Publisher::create($request->all());
 
         return redirect('publishers');
-        // return $request;
     }
 
     /**
