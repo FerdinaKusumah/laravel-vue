@@ -39,7 +39,7 @@
     <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" :action="actionUrl" autocomplete="off">
+                <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
                     <div class="modal-header">
                         <h4 class="modal-title">Member</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -143,25 +143,32 @@
                 },
                 addData() {
                     this.data = {};
-                    this.actionUrl = '{{ url('members') }}';
                     this.editStatus = false;
                     $('#modal-default').modal();
                 }, 
                 editData(event, row){
                     this.data = this.datas[row];
-                    this.actionUrl = '{{ url('members') }}'+'/'+this.data.id;
                     this.editStatus = true;
                     $('#modal-default').modal();
                 },
                 deleteData(event, id){
-                    this.actionUrl = '{{ url('members') }}'+'/'+id;
-                    
                     if (confirm("Are You sure wanna delete this?")) {
-                        axios.post('{{ url('members') }}'+'/'+id, {_method: 'DELETE'}).then(response =>{
-                            location.reload();
+                        $(event.target).parents('tr').remove();
+                        axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response =>{
+                            alert('Data has been removed!');
                         });
                     }
-                }
+                },
+                submitForm(event, id) {
+                    event.preventDefault();
+                    const _this = this;
+                    var actionUrl = ! this.editStatus ? this.actionUrl : this.actionUrl+'/'+id;
+                    
+                    axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+                        $('#modal-default').modal('hide');
+                        _this.table.ajax.reload();
+                    });
+                },
             }
         });
     </script>
