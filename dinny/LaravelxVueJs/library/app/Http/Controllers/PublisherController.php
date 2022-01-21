@@ -15,10 +15,10 @@ class PublisherController extends Controller
     public function index()
     {
         $publishers = publisher::with('books')->get();
-        $publishers = Publisher::with('books')->paginate(5)->withQueryString();;
+        $publishers = Publisher::with('books')->paginate(25)->withQueryString();;
 
         //return $publishers;
-        return view('admin.publisher.index', compact('publishers'));
+        return view('admin.publisher', compact('publishers'));
 
     }
 
@@ -29,7 +29,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view('admin.publisher.create');
+        return view('admin.publisher');
     }
 
     /**
@@ -40,20 +40,21 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this ->validate($request, [
             'name'  => ['required'],
             'email'  => ['required', 'email'],
-            'phone_number'  => ['required', 'numeric', 'min:10', 'max:13'],
-            'address'  => ['required'],
+            'phone_number'  => ['required', 'numeric', 'digits_between: 10,13'],
+            'address'  => ['required'], 
         ]);
 
         // $publisher = new Publisher;
         // $publisher->name = $request->name;
         // $publisher->save();
 
-        Publisher::create($request->all());
+        publisher::create($request->all());
 
         return redirect('publishers');
+        //return $request;
     }
 
     /**
@@ -75,7 +76,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        return view('admin.publisher.edit', compact('publisher'));
+        //return view('admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -89,8 +90,8 @@ class PublisherController extends Controller
     {
          $this->validate($request, [
             'name'  => ['required'],
-            'email'  => ['required'],
-            'phone_number'  => ['required'],
+            'email'  => ['required', 'email'],
+            'phone_number'  => ['required', 'numeric', 'digits_between: 10,13'],
             'address'  => ['required'],
         ]);
 
