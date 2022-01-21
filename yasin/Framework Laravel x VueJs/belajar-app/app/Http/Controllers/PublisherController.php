@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class PublisherController extends Controller
 {
     
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
     
@@ -19,9 +20,15 @@ class PublisherController extends Controller
      */
     public function index()
     {   
-        $publishers = Publisher::with('books')->get();
+        return view('admin.publisher.index');
+    }
 
-        return view('admin.publisher.index',  compact('publishers'));
+    public function api ()
+    {
+        $publishers = Publisher::all();
+        $datatables = datatables()->of($publishers)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**

@@ -9,62 +9,33 @@
 @endsection
 
 @section('content')
-
 <div id="controller">
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md">
+    <div class="row">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
-                <!-- <a href="{{ url('authors/create') }}" class="btn btn-sm btn-primary pull-right">Create New Author</a> -->
                 </div>
               <!-- /.card-header -->
                 <div class="card-body p-3">
                     <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                            <th class="text-center align-middle">No</th>
+                                <th class="text-center align-middle">No</th>
                                 <th class="text-center align-middle">Name</th>
                                 <th class="text-center align-middle">Email</th>
                                 <th class="text-center align-middle">Phone Number</th>
                                 <th class="text-center align-middle">Address</th>
-                                <!-- <th class="text-center align-middle">Total Buku</th>
-                                <th class="text-center align-middle">Created_at</th> -->
                                 <th width="15%" class="text-center align-middle">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($publishers as $key => $publisher)
-                            <tr>
-                            <td class="text-center align-middle">{{ $key+1 }}</td>
-                                <td class="align-middle"> {{ $publisher->name }} </td>
-                                <td class="align-middle"> {{ $publisher->email }} </td>
-                                <td class="text-center align-middle"> {{ $publisher->phone_number }} </td>
-                                <td class="align-middle"> {{ $publisher->address }} </td>
-                                <!-- <td class="text-center align-middle"> {{ count($publisher->books) }} </td>
-                                <td class="text-center align-middle">{{ date('d-M-Y', strtotime( $publisher->created_at )) }}</td> -->
-                                <td class="text-center align-middle">
-                                <!-- <a href="{{ url('publishers/'.$publisher->id.'/edit') }}" class="btn btn-warning btn-sm mb-2"> Edit </a>
-                                <form action="{{ url('publishers', ['id' => $publisher->id]) }}" method="post">
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="
-                                    return confirm('Are You sure wanna delete this?')">
-                                    @method('delete')
-                                    @csrf
-                                </form> -->
-                                    <a href="#" @click="editData({{ $publisher }})" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="#" @click="deleteData({{ $publisher->id }})" class="btn btn-danger btn-sm">Delete</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
                     </table>
+                </div>
                 <!-- /.card-body -->
-              </div>
+            </div>
         <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
+        </div><!-- /.container-fluid -->
+    </div>
     <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -128,7 +99,74 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
-    <!-- CRUD Vue js -->
+    <script type="text/javascript">
+        var actionUrl = '{{ url('publishers') }}';
+        var apiUrl = '{{ url('api/publishers') }}';
+
+        var columns = [
+            {data: 'DT_RowIndex', class: 'text-center align-middle', orderable: true},
+            {data: 'name', class: 'text-center align-middle', orderable: true},
+            {data: 'email', class: 'text-center align-middle', orderable: true},
+            {data: 'phone_number', class: 'text-center align-middle', orderable: true},
+            {data: 'address', class: 'text-center align-middle', orderable: true},
+            {render: function (index, row, data, meta) {
+                return `<a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">Edit</a>
+                <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">Delete</a>`;
+            }, 
+            orderable: false, class: 'text-center align-middle'},
+        ];
+
+        var controller = new Vue({
+            el: '#controller',
+            data: {
+                datas: [],
+                data: {},
+                actionUrl,
+                apiUrl,
+                editStatus: false,
+            },
+            mounted: function () {
+                this.datatable();
+            },
+            methods: {
+                datatable () {
+                    const _this = this;
+                    _this.table = $('#datatable').DataTable({
+                        ajax: {
+                            url: _this.apiUrl,
+                            type: 'GET',
+                        },
+                        columns: columns
+                    }).on('xhr', function () {
+                        _this.datas = _this.table.ajax.json().data;
+                    });
+                },
+                addData() {
+                    this.data = {};
+                    this.actionUrl = '{{ url('publishers') }}';
+                    this.editStatus = false;
+                    $('#modal-default').modal();
+                }, 
+                editData(event, row){
+                    this.data = this.datas[row];
+                    this.actionUrl = '{{ url('publishers') }}'+'/'+this.data.id;
+                    this.editStatus = true;
+                    $('#modal-default').modal();
+                },
+                deleteData(event, id){
+                    this.actionUrl = '{{ url('publishers') }}'+'/'+id;
+                    
+                    if (confirm("Are You sure wanna delete this?")) {
+                        axios.post('{{ url('publishers') }}'+'/'+id, {_method: 'DELETE'}).then(response =>{
+                            location.reload();
+                        });
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- CRUD Vue js
     <script type="text/javascript">
         var controller = new Vue({
             el: '#controller',
@@ -160,29 +198,17 @@
                         axios.post('{{ url('publishers') }}'+'/'+id, {_method: 'DELETE'}).then(response =>{
                             location.reload();
                         });
-                        // axios.delete(this.actionURL).then(response => {
-                        //     console.log(response);
-                        // });
-
-                        // axios.delete('{{ url('publishers') }}'+'/'+id)
-                        // .then(response => {
-                        //     location.reload();
-                        //     console.log();
-                        // })
-                        // .catch(function (error) {
-                        //     console.log(error.response)
-                        // })
                     }
                 }
             }
         });
     </script>
 
-    <!-- Data Table -->
+    Data Table
     <script type="text/javascript">
     $(function () {
         $("#datatable").DataTable({
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
-    </script>
+    </script> -->
 @endsection
