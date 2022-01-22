@@ -28,6 +28,11 @@ class PublisherController extends Controller
         $publishers = Publisher::all();
         $datatables = datatables()->of($publishers)->addIndexColumn();
 
+        $datatables = datatables()->of($publishers)
+                            ->addColumn('date', function($publisher){
+                                return dateFormat($publisher->created_at);
+                            })->addIndexColumn();
+
         return $datatables->make(true);
     }
 

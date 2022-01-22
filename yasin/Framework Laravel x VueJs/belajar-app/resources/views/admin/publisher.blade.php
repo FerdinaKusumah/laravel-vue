@@ -26,6 +26,7 @@
                                 <th class="text-center align-middle">Email</th>
                                 <th class="text-center align-middle">Phone Number</th>
                                 <th class="text-center align-middle">Address</th>
+                                <th class="text-center align-middle">Created At</th>
                                 <th width="15%" class="text-center align-middle">Action</th>
                             </tr>
                         </thead>
@@ -109,6 +110,7 @@
             {data: 'email', class: 'text-center align-middle', orderable: true},
             {data: 'phone_number', class: 'text-center align-middle', orderable: true},
             {data: 'address', class: 'text-center align-middle', orderable: true},
+            {data: 'date', class: 'text-center align-middle', orderable: true},
             {render: function (index, row, data, meta) {
                 return `<a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">Edit</a>
                 <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">Delete</a>`;

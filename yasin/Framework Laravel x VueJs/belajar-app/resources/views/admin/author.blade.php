@@ -30,8 +30,8 @@
                                 <th class="text-center align-middle">Email</th>
                                 <th class="text-center align-middle">Phone Number</th>
                                 <th class="text-center align-middle">Address</th>
-                                <!-- <th class="text-center align-middle">Total Buku</th>
-                                <th class="text-center align-middle">Created_at</th> -->
+                                <!-- <th class="text-center align-middle">Total Buku</th> -->
+                                <th class="text-center align-middle">Created_at</th>
                                 <th width="15%" class="text-center align-middle">Action</th>
                             </tr>
                         </thead>
@@ -43,8 +43,8 @@
                                 <td class="align-middle"> {{ $author->email }} </td>
                                 <td class="text-center align-middle"> {{ $author->phone_number }} </td>
                                 <td class="align-middle"> {{ $author->address }} </td>
-                                <!-- <td class="text-center align-middle"> {{ count($author->books) }} </td>
-                                <td class="text-center align-middle">{{ date('d-M-Y', strtotime( $author->created_at )) }}</td> -->
+                                <!-- <td class="text-center align-middle"> {{ count($author->books) }} </td> -->
+                                <td class="text-center align-middle">{{ dateFormat($author->created_at) }}</td>
                                 <td class="text-center align-middle">
                                 <!-- <a href="{{ url('authors/'.$author->id.'/edit') }}" class="btn btn-warning btn-sm mb-2"> Edit </a>
                                 <form action="{{ url('authors', ['id' => $author->id]) }}" method="post">
