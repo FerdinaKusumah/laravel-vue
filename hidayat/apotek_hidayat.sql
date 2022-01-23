@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 18 Jan 2022 pada 03.40
+-- Generation Time: 23 Jan 2022 pada 04.20
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -52,7 +52,6 @@ INSERT INTO `tb_dokter` (`id`, `nama`, `tanggal_lahir`, `alamat`, `no_tlp`) VALU
 CREATE TABLE IF NOT EXISTS `tb_obat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `merek` varchar(50) NOT NULL,
-  `jumlah` varchar(50) NOT NULL,
   `jenis` varchar(50) NOT NULL,
   `harga` varchar(50) NOT NULL,
   `id_dokter` int(11) NOT NULL,
@@ -64,8 +63,39 @@ CREATE TABLE IF NOT EXISTS `tb_obat` (
 -- Dumping data untuk tabel `tb_obat`
 --
 
-INSERT INTO `tb_obat` (`id`, `merek`, `jumlah`, `jenis`, `harga`, `id_dokter`) VALUES
-(1, 'panadol', '2', 'pereda rasa sakit', '10.000', 1);
+INSERT INTO `tb_obat` (`id`, `merek`, `jenis`, `harga`, `id_dokter`) VALUES
+(1, 'panadol', 'pereda rasa sakit', '10.000', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_pembeli`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_pembeli` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) NOT NULL,
+  `alamat` varchar(50) NOT NULL,
+  `no_tlp` varchar(50) NOT NULL,
+  `id_pembeli` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_pembeli` (`id_pembeli`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_penjualan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_penjualan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_obat` int(11) NOT NULL,
+  `jumlah_obat` varchar(50) NOT NULL,
+  `total_harga` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_obat` (`id_obat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -75,9 +105,21 @@ INSERT INTO `tb_obat` (`id`, `merek`, `jumlah`, `jenis`, `harga`, `id_dokter`) V
 -- Ketidakleluasaan untuk tabel `tb_obat`
 --
 ALTER TABLE `tb_obat`
-  ADD CONSTRAINT `tb_obat_ibfk_3` FOREIGN KEY (`id_dokter`) REFERENCES `tb_dokter` (`id`),
   ADD CONSTRAINT `tb_obat_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `tb_dokter` (`id`),
-  ADD CONSTRAINT `tb_obat_ibfk_2` FOREIGN KEY (`id_dokter`) REFERENCES `tb_dokter` (`id`);
+  ADD CONSTRAINT `tb_obat_ibfk_2` FOREIGN KEY (`id_dokter`) REFERENCES `tb_dokter` (`id`),
+  ADD CONSTRAINT `tb_obat_ibfk_3` FOREIGN KEY (`id_dokter`) REFERENCES `tb_dokter` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_pembeli`
+--
+ALTER TABLE `tb_pembeli`
+  ADD CONSTRAINT `tb_pembeli_ibfk_1` FOREIGN KEY (`id_pembeli`) REFERENCES `tb_penjualan` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_penjualan`
+--
+ALTER TABLE `tb_penjualan`
+  ADD CONSTRAINT `tb_penjualan_ibfk_1` FOREIGN KEY (`id_obat`) REFERENCES `tb_obat` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
