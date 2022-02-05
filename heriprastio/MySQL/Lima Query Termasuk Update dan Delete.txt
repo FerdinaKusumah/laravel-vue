@@ -1,0 +1,11 @@
+update penyedia_obat set no_telepon = "02167891011" where id_penyedia_obat = 9;
+
+delete from persediaan_obat where id_persediaan_obat between 13 and 14;
+
+insert into persediaan_obat values (' ',"Mixagrip","Cair",50,9),(' ',"Komik","Cair",50,9);
+
+delete from persediaan_obat where id_persediaan_obat between 13 and 14;
+
+update persediaan_obat set nama_obat = "Panadol" where nama_obat = "Paradol";
+
+select id_persediaan_obat, nama_obat from persediaan_obat where nama_obat like "Panadol";
