@@ -14,7 +14,11 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('admin.member.index');
+        $members = member::with('user')->get();
+        $members = member::with('user')->paginate(25)->withQueryString();;
+
+        //return $members;
+        return view('admin.member', compact('members'));
     }
 
     /**
@@ -24,7 +28,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.member');
     }
 
     /**
@@ -35,7 +39,17 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this ->validate($request, [
+            'name'  => ['required'],
+            'gender' => ['required'],
+            'phone_number'  => ['required', 'numeric', 'digits_between: 10,13'],
+            'address'  => ['required'], 
+            'email'  => ['required', 'email'],
+        ]);
+
+        member::create($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -69,7 +83,17 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $this ->validate($request, [
+            'name'  => ['required'],
+            'gender' => ['required'],
+            'phone_number'  => ['required', 'numeric', 'digits_between: 10,13'],
+            'address'  => ['required'], 
+            'email'  => ['required', 'email'],
+        ]);
+
+        $member->update($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -80,6 +104,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return redirect('members');
     }
 }

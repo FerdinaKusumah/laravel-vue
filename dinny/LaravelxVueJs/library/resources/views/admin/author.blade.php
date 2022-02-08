@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 @section('header', 'Author')
-
+ 
 @section('css')
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
-
+ 
 @section('content')
-<section class="content">
-  <div id="controller">
+<section class="content" id="controller">
+  <div>
     <div class="container-fluid">
       <div class="row">
         <!-- /.col -->
@@ -64,50 +64,50 @@
     </div>
     <!-- /.row -->
     </div><!-- /.container-fluid -->
-</section>
-
-<div class="modal fade" id="modal-default">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method="post" :action="actionUrl" autocomplete="off">
-        <div class="modal-header">
-          <h4 class="modal-title">Author</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="modal fade" id="modal-default">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="post" :action="actionUrl" autocomplete="off">
+            <div class="modal-header">
+              <h4 class="modal-title">Author</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              @csrf
+    
+              <input type="hidden" name="_method" value="PUT" v-if="editStatus">
+    
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" :value="data.name" required="">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email" :value="data.email" required="">
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" class="form-control" name="phone_number" :value="data.phone_number" required="">
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" name="address" :value="data.address" required="">
+              </div>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+          </form>
         </div>
-        <div class="modal-body">
-          @csrf
-
-          <input type="hidden" name="_method" v-if="editStatus">
-
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" name="name" :value="data.name" required="">
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email" :value="data.email" required="">
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" class="form-control" name="phone_number" :value="data.phone_number" required="">
-          </div>
-          <div class="form-group">
-            <label>Address</label>
-            <input type="text" class="form-control" name="address" :value="data.address" required="">
-          </div>
-          </div>
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-      </form>
+      </div> 
     </div>
-  </div> 
-</div>
+</section>
+ 
 @endsection
-
+ 
 @section('js')
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -147,7 +147,7 @@
         editStatus : false
       },
       mounted: function() {
-
+ 
       },
       methods: {
         addData() {
@@ -164,12 +164,12 @@
         },
         deleteData(id) {
           this.actionUrl = '{{ url('authors') }}'+'/'+id;
-
+ 
           if (confirm("Are You sure wanna delete this?")) {
               axios.post('{{ url('authors') }}'+'/'+id, {_method: 'DELETE'}).then(response =>{
                 location.reload();
               });
-
+ 
               // axios.delete(this.actionURL).then(response => {
               // console.log(response);
               // });

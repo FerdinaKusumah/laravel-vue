@@ -25,6 +25,14 @@ class AuthorController extends Controller
         return view('admin.author', compact('authors'));
     }
 
+    public function api()
+    {
+        $authors = Author::all();
+        $datatables = datatables()->of($authors)->addIndexColumn();
+
+        return $datatables->make(true);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
