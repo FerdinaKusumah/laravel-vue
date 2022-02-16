@@ -49,7 +49,7 @@ $katalog = mysqli_query($con, "SELECT * FROM katalog");
                     <select name="id_pengarang">
                         <?php
                         while ($pengarang_row = mysqli_fetch_array($pengarang)) {
-                            echo "<option value = ' " . $pengarang_row['id_pengarang'] . "'>" . $pengarang_row['nama_pengarang'] . "</option>";
+                            echo "<option value =' " . $pengarang_row['id_pengarang'] . "'>" . $pengarang_row['nama_pengarang'] . "</option>";
                         }
                         ?>
                     </select>
@@ -98,10 +98,15 @@ $katalog = mysqli_query($con, "SELECT * FROM katalog");
         // values ($isbn,$judul,$tahun,$id_penerbit,$id_pengarang,$id_katalog,$qty_stok,$harga_pinjam)");
         // $result = mysqli_query($con, "INSERT INTO `buku` (`isbn`, `judul`, `tahun`, `id_penerbit`, `id_pengarang`, `id_katalog`, `qty_stok`, `harga_pinjam`) VALUES ('$isbn', '$judul', '$tahun', '$id_penerbit', '$id_pengarang', '$id_katalog', '$qty_stok', '$harga_pinjam');");
         $result = mysqli_query($con, "INSERT INTO buku(isbn,judul,tahun,id_penerbit,id_pengarang,id_katalog,qty_stok,harga_pinjam) VALUES('$isbn','$judul','$tahun','$id_penerbit','$id_pengarang','$id_katalog','$qty_stok','$harga_pinjam');");
-        // header("location:index.php");
+        header("location:index.php");
         // print_r($isbn, $judul);
         // print_r($result);
         // print_r($judul);
+        if (!$result) {
+            echo ("Error description: " . $con->error);
+        } else {
+            header("location:index.php");
+        }
     }
     ?>
 </body>

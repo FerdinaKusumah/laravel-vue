@@ -21,7 +21,7 @@ order by judul asc");
     <center>
         <a href="index.php">Buku</a>
         <a href="#">Penerbit</a>
-        <a href="#">Pengarang</a>
+        <a href="addpengarang.php">Pengarang</a>
         <a href="#">Katalog</a>
     </center>
     <a href="add.php">Add New Buku</a>
