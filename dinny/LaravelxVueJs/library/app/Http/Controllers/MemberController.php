@@ -12,15 +12,27 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $members = member::with('user')->get();
-        $members = member::with('user')->paginate(25)->withQueryString();;
+        //$members = member::with('user')->paginate(25)->withQueryString();;
 
         //return $members;
         return view('admin.member', compact('members'));
     }
 
+    public function api()
+    {
+        $members = Member::all();
+        $datatables = datatables()->of($members)->addIndexColumn();
+
+        return $datatables->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *

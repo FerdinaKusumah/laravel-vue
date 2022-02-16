@@ -19,10 +19,11 @@ class AuthorController extends Controller
     public function index()
     {
         $authors = Author::with('books')->get();
-        $authors = Author::with('books')->paginate(25)->withQueryString();
+        //$authors = Author::with('books')->paginate(25)->withQueryString();
 
         //return $authors;
         return view('admin.author', compact('authors'));
+        //return view('admin.author');
     }
 
     public function api()

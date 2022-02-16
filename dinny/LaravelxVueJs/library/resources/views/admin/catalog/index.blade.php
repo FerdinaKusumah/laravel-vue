@@ -12,7 +12,7 @@
               <div class="card-header">
                 <a href="{{ url ('catalogs/create') }}" class="btn btn-sm btn-primary pull-right"> Create New Catalog</a>
 
-                {{-- <div class="card-tools">
+                <!-- <div class="card-tools">
                   <ul class="pagination pagination-sm float-right">
                     <li class="page-item"><a class="page-link" href="#">«</a></li>
                     <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -20,7 +20,7 @@
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item"><a class="page-link" href="#">»</a></li>
                   </ul>
-                </div> --}}
+                </div> -->
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">

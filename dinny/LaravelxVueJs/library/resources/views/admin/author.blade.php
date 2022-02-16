@@ -33,7 +33,7 @@
                       <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <!-- <tbody>
                   @foreach($authors as $key => $author)
                     <tr>
                       <td class="text-center">{{ $key+1}}</td>
@@ -42,18 +42,18 @@
                       <td class="text-center">{{ $author->phone_number }}</td>
                       <td class="text-center">{{ $author->address }}</td>
                       <td class="text-center">
-                        <!-- <a href="#" @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="#" @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ url('authors', ['id' => $author->id]) }}" method="post">
                           <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
                           @method('delete')
                           @csrf
-                        </form> -->
+                        </form>
                         <a href="#" @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
                         <a href="#" @click="deleteData({{ $author->id }})" class="btn btn-danger btn-sm">Delete</a>
                       </td>
                     </tr>
                   @endforeach
-                </tbody>
+                </tbody> -->
               </table>
               <!-- /.card-body -->
               </div>
@@ -62,12 +62,13 @@
         </div>
       </div>
     </div>
+  </div>
     <!-- /.row -->
     </div><!-- /.container-fluid -->
     <div class="modal fade" id="modal-default">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form method="post" :action="actionUrl" autocomplete="off">
+          <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
             <div class="modal-header">
               <h4 class="modal-title">Author</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -122,23 +123,104 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-<script type="text/javascript">
-  $(function () {
+<!--Membuat tampilan datatable -->
+<!-- <script type="text/javascript">
+  $(function () { 
     $("#datatable").DataTable(
-      //{
-      //"responsive": true, "lengthChange": false, "autoWidth": false, 
-      //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    //}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    //$('#datatable1').DataTable({
-      //"searching": false,
-      //"ordering": true,
-      //"info": true,
-    //});
-    );
+      {
+      "responsive": true, "lengthChange": false, "autoWidth": false, 
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'),
+      "searching": false,
+      "ordering": true,
+      "info": true
+  });
+  });
+</script> -->
+<script type="text/javascript">
+  var actionUrl = '{{ url('authors') }}';
+  var apiUrl = '{{ url('api/authors') }}';
+
+  var columns = [
+    {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+    {data: 'name', class: 'text-center', orderable: true},
+    {data: 'email', class: 'text-center', orderable: false},
+    {data: 'phone_number', class: 'text-center', orderable: false},
+    {data: 'address', class: 'text-center', orderable: false},
+    {render: function (index, row, data, meta){
+      return `
+        <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
+          Edit
+        </a>
+        <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+          Delete
+        </a>
+      `
+      ;
+    }, orderable: false, width: '200px', class: 'text-center'},
+  ];
+  var controller = new Vue({
+      el: '#controller',
+      data: {
+        datas : [],
+        data : {},
+        actionUrl,
+        apiUrl,
+        editStatus : false,
+      },
+      mounted: function() {
+        this.datatable();
+      },
+      methods: {
+        datatable() {
+          const _this = this;
+          _this.table = $('#datatable').DataTable({
+            ajax: {
+              url: _this.apiUrl,
+              type: 'GET',
+            },
+            columns: columns
+          }).on('xhr', function () {
+            _this.datas = _this.table.ajax.json().data;
+          });
+        },
+        addData() {
+          this.data = {};
+          this.editStatus = false;
+          $('#modal-default').modal();
+        },
+        editData(event, row) {
+          this.data = this.datas[row];
+          //console.log(this.data);
+          this.editStatus = true;
+          $('#modal-default').modal();
+        },
+        deleteData(event, id) {
+          if (confirm("Are You sure wanna delete this?")) {
+            $(event.target).parents('tr').remove();
+            axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
+                alert('Data has been removed');
+            });
+          }
+        },
+        submitForm(event, id) {
+          event.preventDefault();
+          const _this = this;
+          var actionUrl = ! this.editStatus ? this.actionUrl : this.actionUrl + '/' + id;
+          axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+            $('#modal-default').modal('hide');
+            _this.table.ajax.reload();
+          });
+        },
+      }
   });
 </script>
+
+<!-- Memanggil Data.js
+<script src="{{ asset('js/data.js') }}"></script> -->
+
 <!-- CRUD Vue js -->
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     var controller = new Vue({
       el: '#controller',
       data: {
@@ -185,5 +267,5 @@
         }
       }
     });
-  </script>
+  </script> -->
 @endsection

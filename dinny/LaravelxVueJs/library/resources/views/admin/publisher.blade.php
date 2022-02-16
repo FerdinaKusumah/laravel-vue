@@ -33,27 +33,6 @@
                       <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-                  @foreach($publishers as $key => $publisher)
-                    <tr>
-                      <td class="text-center">{{ $key+1}}</td>
-                      <td class="text-center">{{ $publisher->name }}</td>
-                      <td class="text-center">{{ $publisher->email }}</td>
-                      <td class="text-center">{{ $publisher->phone_number }}</td>
-                      <td class="text-center">{{ $publisher->address }}</td>
-                      <td class="text-center">
-                        <!-- <a href="#" @click="editData({{ $publisher }})" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ url('publishers', ['id' => $publisher->id]) }}" method="post">
-                          <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-                          @method('delete')
-                          @csrf
-                        </form> -->
-                        <a href="#" @click="editData({{ $publisher }})" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="#" @click="deleteData({{ $publisher->id }})" class="btn btn-danger btn-sm">Delete</a>
-                      </td>
-                    </tr>
-                  @endforeach
-                </tbody>
               </table>
               <!-- /.card-body -->
               </div>
@@ -67,9 +46,9 @@
     <div class="modal fade" id="modal-default">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form method="post" :action="actionUrl" autocomplete="off">
+          <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
             <div class="modal-header">
-              <h4 class="modal-title">Autho</h4>
+              <h4 class="modal-title">Publisher</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
@@ -123,67 +102,83 @@
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script type="text/javascript">
-  $(function () {
-    $("#datatable").DataTable(
-      //{
-      //"responsive": true, "lengthChange": false, "autoWidth": false, 
-      //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    //}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    //$('#datatable1').DataTable({
-      //"searching": false,
-      //"ordering": true,
-      //"info": true,
-    //});
-    );
-  });
-</script>
-<!-- CRUD Vue js -->
-  <script type="text/javascript">
+  var actionUrl = '{{ url('publishers') }}';
+  var apiUrl = '{{ url('api/publishers') }}';
+
+  var columns = [
+    {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+    {data: 'name', class: 'text-center', orderable: true},
+    {data: 'email', class: 'text-center', orderable: false},
+    {data: 'phone_number', class: 'text-center', orderable: false},
+    {data: 'address', class: 'text-center', orderable: false},
+    {render: function (index, row, data, meta){
+      return `
+        <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
+          Edit
+        </a>
+        <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+          Delete
+        </a>
+      `
+      ;
+    }, orderable: false, width: '200px', class: 'text-center'},
+  ];
     var controller = new Vue({
       el: '#controller',
       data: {
+        datas : [],
         data : {},
-        actionUrl : '{{ url('publishers') }}',
-        editStatus : false
+        actionUrl,
+        apiUrl,
+        editStatus : false,
       },
       mounted: function() {
- 
+        this.datatable();
       },
       methods: {
+        datatable() {
+          const _this = this;
+          _this.table = $('#datatable').DataTable({
+            ajax: {
+              url: _this.apiUrl,
+              type: 'GET',
+            },
+            columns: columns
+          }).on('xhr', function () {
+            _this.datas = _this.table.ajax.json().data;
+          });
+        },
         addData() {
           this.data = {};
-          this.actionUrl = '{{ url('publishers') }}';
           this.editStatus = false;
           $('#modal-default').modal();
         },
-        editData(data) {
-          this.data = data;
-          this.actionUrl = '{{ url('publishers') }}'+'/'+data.id;
+        editData(event, row) {
+          this.data = this.datas[row];
+          //console.log(this.data);
           this.editStatus = true;
           $('#modal-default').modal();
         },
-        deleteData(id) {
-          this.actionUrl = '{{ url('publishers') }}'+'/'+id;
- 
+        deleteData(event, id) {
           if (confirm("Are You sure wanna delete this?")) {
-              axios.post('{{ url('publishers') }}'+'/'+id, {_method: 'DELETE'}).then(response =>{
-                location.reload();
-              });
- 
-              // axios.delete(this.actionURL).then(response => {
-              // console.log(response);
-              // });
-              // axios.delete('{{ url('publishers') }}'+'/'+id)
-              // .then(response => {
-              //     location.reload();
-              //     console.log();
-              // })
-              // .catch(function (error) {
-              //     console.log(error.response)
-              // })
+            $(event.target).parents('tr').remove();
+            axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
+                alert('Data has been removed');
+            });
           }
-        }
+        },
+        submitForm(event, id) {
+          event.preventDefault();
+          const _this = this;
+          var actionUrl = ! this.editStatus ? this.actionUrl : this.actionUrl + '/' + id;
+          axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+            $('#modal-default').modal('hide');
+            _this.table.ajax.reload();
+          });
+        },
       }
-    });
-  </script>
+  });
+</script>
+<!-- Memanggil Data.js
+<script src="{{ asset('js/data.js') }}"></script> -->
 @endsection

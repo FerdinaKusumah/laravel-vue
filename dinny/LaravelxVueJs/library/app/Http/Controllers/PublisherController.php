@@ -12,14 +12,27 @@ class PublisherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $publishers = publisher::with('books')->get();
-        $publishers = Publisher::with('books')->paginate(25)->withQueryString();;
+        //$publishers = Publisher::with('books')->paginate(25)->withQueryString();;
 
         //return $publishers;
         return view('admin.publisher', compact('publishers'));
 
+    }
+
+    public function api()
+    {
+        $publishers = Publisher::all();
+        $datatables = datatables()->of($publishers)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
