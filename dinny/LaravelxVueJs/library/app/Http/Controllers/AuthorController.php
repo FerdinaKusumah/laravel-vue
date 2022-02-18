@@ -30,6 +30,9 @@ class AuthorController extends Controller
     {
         $authors = Author::all();
         $datatables = datatables()->of($authors)->addIndexColumn();
+        foreach ($authors as $key => $author) {
+            $author->date = convert_date($author->created_at);
+        }
 
         return $datatables->make(true);
     }
