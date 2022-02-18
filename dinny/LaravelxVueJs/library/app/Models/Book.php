@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+    
+    protected $fillable = ['isbn', 'title', 'year', 'publisher_id', 'author_id', 'catalog_id', 'qty', 'price'];
 
+    public function transaction_detail(){
+        return $this->hasOne('App\Models\TransactionDetail', 'book_id');
+    }
     public function publisher()
     {
         return $this-> belongsTo('App\Models\Publisher', 'publisher_id');

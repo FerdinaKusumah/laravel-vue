@@ -20,7 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/books', [App\Http\Controllers\BookController::class, 'index']);
+
+Route::resource('/books', App\Http\Controllers\BookController::class);
+Route::get('/api/books', [App\Http\Controllers\BookController::class,'api']);
+//Route::get('/books', [App\Http\Controllers\BookController::class, 'index']);
+
 //Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
 Route::resource('/members', App\Http\Controllers\MemberController::class);
 Route::get('/api/members', [App\Http\Controllers\MemberController::class,'api']);
@@ -33,6 +37,8 @@ Route::get('/api/members', [App\Http\Controllers\MemberController::class,'api'])
 //Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'destroy']);
 
 Route::resource('/catalogs', App\Http\Controllers\CatalogController::class);
+Route::get('/api/catalogs', [App\Http\Controllers\CatalogController::class,'api']);
+
 
 //Route::get('/publishers', [App\Http\Controllers\PublisherController::class, 'index']);
 //Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']); 
