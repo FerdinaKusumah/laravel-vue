@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/my.css">
 </head>
 <?php
 include_once("configdb.php");
@@ -49,7 +52,7 @@ $katalog = mysqli_query($con, "SELECT * FROM katalog");
                     <select name="id_pengarang">
                         <?php
                         while ($pengarang_row = mysqli_fetch_array($pengarang)) {
-                            echo "<option value =' " . $pengarang_row['id_pengarang'] . "'>" . $pengarang_row['nama_pengarang'] . "</option>";
+                            echo "<option value ='" . $pengarang_row['id_pengarang'] . "'>" . $pengarang_row['nama_pengarang'] . "</option>";
                         }
                         ?>
                     </select>
@@ -61,7 +64,7 @@ $katalog = mysqli_query($con, "SELECT * FROM katalog");
                     <select name="id_katalog">
                         <?php
                         while ($katalog_row = mysqli_fetch_array($katalog)) {
-                            echo "<option value = '" . $katalog_row['id_katalog'] . "'>" . $katalog_row['nama'] . "</option>";
+                            echo "<option value ='" . $katalog_row['id_katalog'] . "'>" . $katalog_row['nama'] . "</option>";
                         }
                         ?>
 
@@ -79,7 +82,7 @@ $katalog = mysqli_query($con, "SELECT * FROM katalog");
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" name="Submit" value="Add"></td>
+                <td><input type="submit" name="Submit" value="Tambah Data"></td>
             </tr>
         </table>
     </form>
@@ -98,15 +101,15 @@ $katalog = mysqli_query($con, "SELECT * FROM katalog");
         // values ($isbn,$judul,$tahun,$id_penerbit,$id_pengarang,$id_katalog,$qty_stok,$harga_pinjam)");
         // $result = mysqli_query($con, "INSERT INTO `buku` (`isbn`, `judul`, `tahun`, `id_penerbit`, `id_pengarang`, `id_katalog`, `qty_stok`, `harga_pinjam`) VALUES ('$isbn', '$judul', '$tahun', '$id_penerbit', '$id_pengarang', '$id_katalog', '$qty_stok', '$harga_pinjam');");
         $result = mysqli_query($con, "INSERT INTO buku(isbn,judul,tahun,id_penerbit,id_pengarang,id_katalog,qty_stok,harga_pinjam) VALUES('$isbn','$judul','$tahun','$id_penerbit','$id_pengarang','$id_katalog','$qty_stok','$harga_pinjam');");
-        header("location:index.php");
+        // header("location:index.php");
         // print_r($isbn, $judul);
         // print_r($result);
-        // print_r($judul);
-        if (!$result) {
-            echo ("Error description: " . $con->error);
-        } else {
-            header("location:index.php");
-        }
+        print_r($_POST);
+        // if (!$result) {
+        //     echo ("Error description: " . $con->error);
+        // } else {
+        //     header("location:index.php");
+        // }
     }
     ?>
 </body>

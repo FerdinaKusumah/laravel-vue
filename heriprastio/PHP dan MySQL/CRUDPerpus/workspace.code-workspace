@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\..\\..\\..\\example-php-native"
+		},
+		{
+			"path": "..\\crudtes"
+		}
+	],
+	"settings": {}
+}

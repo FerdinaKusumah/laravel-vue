@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/my.css">
 </head>
 
 <body>
@@ -51,15 +54,16 @@
         // $result = mysqli_query($con, "insert into buku (isbn,judul,tahun,id_penerbit,id_pengarang,id_katalog,qty_stok,harga_pinjam)
         // values ($isbn,$judul,$tahun,$id_penerbit,$id_pengarang,$id_katalog,$qty_stok,$harga_pinjam)");
         // $result = mysqli_query($con, "INSERT INTO `buku` (`isbn`, `judul`, `tahun`, `id_penerbit`, `id_pengarang`, `id_katalog`, `qty_stok`, `harga_pinjam`) VALUES ('$isbn', '$judul', '$tahun', '$id_penerbit', '$id_pengarang', '$id_katalog', '$qty_stok', '$harga_pinjam');");
-        $result = mysqli_query($con, "INSERT INTO pengarang (id_pengarang,nama_pengarang,email,telp,alamat) VALUES('$idpengarang','$namapeng, $email','$telp','$alamat');");
+        // $result = mysqli_query($con, "INSERT INTO pengarang (id_pengarang,nama_pengarang,email,telp,alamat) VALUES('$idpengarang','$namapeng', '$email','$telp','$alamat');");
         // header("location:index.php");
         // print_r($isbn, $judul);
-        print_r($_POST);
-        // print_r($judul);
-        if (!$result) {
-            echo ("Error description: " . mysqli_error($con));
+        // print_r($_POST);
+        // // print_r($judul);
+
+        if (mysqli_query($con, "INSERT INTO pengarang (id_pengarang,nama_pengarang,email,telp,alamat) VALUES('$idpengarang','$namapeng', '$email','$telp','$alamat');")) {
+            echo "New record created successfully";
         } else {
-            header("location:index.php");
+            echo "Error: " . "<br>" . mysqli_error($con);
         }
     }
     ?>

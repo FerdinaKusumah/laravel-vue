@@ -1,0 +1,26 @@
+body{
+    margin-top: 20px;
+    margin-left: 50px;
+}
+input[type="text"], select, textarea{
+    padding: 7px;
+    margin: 7px;
+    border-radius: 10px;
+}
+input[type="submit"], btn{
+    margin: 10px;
+    padding: 10px 30px;
+    background-color: #3F51B5;
+    color: blanchedalmond;
+    display: inline-block;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+td.myformat{
+    padding: 7px;
+    margin: 7px;
+}
+tr.myformat{
+    padding: 7px;
+    margin: 7px;
+}
