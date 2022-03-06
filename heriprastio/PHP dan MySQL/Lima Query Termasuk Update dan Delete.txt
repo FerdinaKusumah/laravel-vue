@@ -2,7 +2,7 @@ update penyedia_obat set no_telepon = "02167891011" where id_penyedia_obat = 9;
 
 delete from persediaan_obat where id_persediaan_obat between 13 and 14;
 
-insert into persediaan_obat values (' ',"Mixagrip","Cair",50,9),(' ',"Komik","Cair",50,9);
+INSERT INTO persediaan_obat (nama_obat,jenis_obat,jumlah_persediaan_obat,fk_id_penyedia_obat) VALUES ('Bodrexin','Kapsul',123,5),('Xontrexin','Kapsul',100,5),('Jahe Merah','Cair',200,1);
 
 delete from persediaan_obat where id_persediaan_obat between 13 and 14;
 
