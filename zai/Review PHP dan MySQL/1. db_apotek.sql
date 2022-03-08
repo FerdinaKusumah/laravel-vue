@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2022 at 09:02 AM
+-- Generation Time: Mar 08, 2022 at 05:16 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -40,7 +40,20 @@ CREATE TABLE `obat` (
 
 INSERT INTO `obat` (`id`, `nama_obat`, `stok_obat`, `tgl_kadaluarsa`) VALUES
 (1, 'Panadol', 100, '2024-12-09'),
-(2, 'bodrex', 200, '2024-03-14');
+(2, 'bodrex', 200, '2024-12-09'),
+(3, 'Antangin JRG Cair', 200, '2023-08-21'),
+(4, 'Antangin Tablet', 100, '2023-08-21'),
+(5, 'Antimo Anak', 250, '2023-08-21'),
+(6, 'Decolgen', 155, '2024-12-09'),
+(7, 'Diapet', 175, '2025-07-09'),
+(8, 'Fatigon', 220, '2025-07-09'),
+(9, 'Inzana', 185, '2025-07-09'),
+(10, 'Konidin', 100, '2026-06-03'),
+(11, 'Koyo Cabe', 150, '2026-06-03'),
+(12, 'Mixagrip', 120, '2025-07-09'),
+(13, 'Neozep', 125, '2024-12-09'),
+(14, 'Pil kita', 155, '2025-07-09'),
+(15, 'Remacyl', 200, '2024-12-09');
 
 -- --------------------------------------------------------
 
@@ -60,8 +73,21 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`id`, `nama_pasien`, `alamat_pasien`, `umur_pasien`) VALUES
-(1, 'Taslim', 'Pengodokan', 24),
-(2, 'Fadel', 'Pondok Arum', 27);
+(1, 'Randi', 'Cipondoh', 25),
+(2, 'Taslim', 'Pengodokan', 24),
+(3, 'Irman', 'Regency', 28),
+(4, 'Dendi', 'Sepatan', 23),
+(5, 'Rini', 'Cimone', 22),
+(6, 'Tina', 'Regency', 24),
+(7, 'Dini', 'Mauk', 23),
+(8, 'Tari', 'Kotabumi', 24),
+(9, 'Risky', 'Total Persada', 27),
+(10, 'Kiki', 'Kedaung', 26),
+(11, 'Irpan', 'Cipondoh', 25),
+(12, 'Dinda', 'Sangiang', 27),
+(13, 'Selvi', 'Bugel', 24),
+(14, 'Joko', 'Cadas', 22),
+(15, 'Gilang', 'Pengodokan', 23);
 
 -- --------------------------------------------------------
 
@@ -82,7 +108,20 @@ CREATE TABLE `transaksi` (
 
 INSERT INTO `transaksi` (`id`, `id_pasien`, `id_obat`, `jumlah_transaksi`) VALUES
 (1, 2, 2, 2),
-(2, 1, 1, 1);
+(2, 1, 1, 1),
+(3, 12, 10, 5),
+(4, 11, 12, 1),
+(5, 15, 9, 2),
+(6, 13, 13, 7),
+(7, 10, 11, 8),
+(8, 4, 6, 6),
+(9, 6, 7, 9),
+(10, 14, 15, 3),
+(11, 7, 5, 5),
+(12, 5, 8, 4),
+(13, 8, 3, 1),
+(14, 9, 4, 3),
+(15, 3, 14, 6);
 
 --
 -- Indexes for dumped tables
@@ -116,19 +155,19 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
