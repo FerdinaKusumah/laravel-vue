@@ -19,5 +19,5 @@
     - SELECT transaksi.id_obat, obat.nama_obat FROM transaksi INNER JOIN obat ON transaksi.id_obat = obat.id;
 9.  AND
     - SELECT nama_obat FROM obat WHERE stok_obat=200 AND tgl_kadaluarsa='2024-12-09';
-10. SELECT DISTINCT
-    - SELECT DISTINCT alamat FROM siswa;
+10. DISTINCT
+    - SELECT DISTINCT alamat_pasien FROM pasien;
