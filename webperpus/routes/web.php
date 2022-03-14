@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('login/dashboard', function () {
+//     echo 'Hello World';
+// });
+Route::get('login', 'LoginController@view')->name('login');
+// Route::post('login', 'LoginController@authenticate')->name('login.auth');
+Route::post('login', 'LoginController@postLogin');
+Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout')->middleware('auth');
