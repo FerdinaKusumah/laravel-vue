@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('login/dashboard', function () {
 //     echo 'Hello World';
 // });
-Route::get('login', 'LoginController@view')->name('login');
+// Route::get('login', 'LoginController@view')->name('login');
 // Route::post('login', 'LoginController@authenticate')->name('login.auth');
-Route::post('login', 'LoginController@postLogin');
+Route::post('login', [App\Http\Controllers\LoginController::class, 'postLogin'])->name("login");
 Route::get('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('pagehalaman', 'HomeController@view_page');

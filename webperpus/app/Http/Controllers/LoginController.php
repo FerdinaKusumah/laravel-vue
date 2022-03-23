@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 // use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Input as input;
+// use App\Http\Controllers\Redirect;
+use Redirect;
 
 
 class LoginController extends Controller
@@ -34,13 +35,32 @@ class LoginController extends Controller
     }
     public function postLogin(Request $request)
     {
-        $validator = Validator::make(
-            ::all(),
-            array(
-                'email' => 'rewquired|email|unique:Users',
-                'password' => 'required|min:6'
-            )
-        );
+
+        $email = $request->post('email');
+        // dd($request);
+        $password = $request->post('password');
+        // $validator = Validator::make(
+        //     $username,
+        //     $password,
+        //     array(
+        //         'email' => 'rewquired|email|unique:Users',
+        //         'password' => 'required|min:6'
+        //     )
+        // );
+        // dd($username);
+
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|string',
+            'email' => 'required|string|email',
+        ]);
+
+
+
+        if ($validator->fails()) {
+            return redirect()->route('login')->withErrors($validator)->withInput();
+        }
+
+        dd("berhasil");
     }
     public function logout()
     {
