@@ -22,6 +22,5 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo "<br> Isbn : ". $row["isbn"]. " | Judul Buku : ". $row["judul"]. " | Quantity : ". $row["qty_stok"]. " | Nama Katalog : ". $row["nama"];
     }
-} else {
-    $conn->close();
 }
+    $conn->close();
