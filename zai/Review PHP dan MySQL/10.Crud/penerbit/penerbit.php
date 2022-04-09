@@ -170,7 +170,6 @@ $penerbits = query("SELECT * FROM penerbit");
                                         </tr>
                                     </tfoot>
                                     <tbody>
-
                                         <?php $i = 1; ?>
                                         <?php foreach ($penerbits as $penerbit) : ?>
                                         <tr>
@@ -181,39 +180,43 @@ $penerbits = query("SELECT * FROM penerbit");
                                             <td><?= $penerbit["telp"];?></td>
                                             <td><?= $penerbit["alamat"];?></td>
                                             <td>
-                                                <a
-                                                    href="ubah_penerbit.php?id_penerbit=<?= $penerbit["id_penerbit"];?>">Ubah</a>
-                                                |
-                                                <a href="hapus_penerbit.php?id_penerbit=<?= $penerbit["id_penerbit"];?>"
-                                                    onclick="return confirm('Beneran Pengen Dihapus?');">Hapus</a>
+                                                <div class="d-grid gap-2">
+                                                    <a class="btn btn-info"
+                                                        href="ubah_penerbit.php?id_penerbit=<?= $penerbit["id_penerbit"];?>"><i
+                                                            class="fa fa-pencil-alt"></i></a>
+                                                    <a class="btn btn-danger"
+                                                        href="hapus_penerbit.php?id_penerbit=<?= $penerbit["id_penerbit"];?>"
+                                                        onclick="return confirm('Beneran Pengen Dihapus?');"><i
+                                                            class="fa fa-trash"></i></a>
                                             </td>
-                                        </tr>
-                                        <?php $i++;?>
-                                        <?php endforeach ?>
-                                    </tbody>
-                                </table>
                             </div>
+                            </tr>
+                            <?php $i++;?>
+                            <?php endforeach ?>
+                            </tbody>
+                            </table>
                         </div>
                     </div>
-
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; ZN Website 2022</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; ZN Website 2022</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->

@@ -194,37 +194,43 @@ $books = query("SELECT buku.*, nama_pengarang, nama_penerbit, katalog.nama as na
                                             <td><?= $book["qty_stok"];?></td>
                                             <td><?= $book["harga_pinjam"];?></td>
                                             <td>
-                                                <a href="ubah_buku.php?isbn=<?= $book["isbn"];?>">Ubah</a> |
-                                                <a href="hapus_buku.php?isbn=<?= $book["isbn"];?>"
-                                                    onclick="return confirm('Beneran Pengen Dihapus?');">Hapus</a>
+                                                <div class="d-grid gap-2 d-flex justify-content-between">
+                                                    <a class="btn btn-info mr-1"
+                                                        href="ubah_buku.php?isbn=<?= $book["isbn"];?>"><i
+                                                            class="fa fa-pencil-alt"></i></a>
+                                                    <a class="btn btn-danger"
+                                                        href="hapus_buku.php?isbn=<?= $book["isbn"];?>"
+                                                        onclick="return confirm('Beneran Pengen Dihapus?');"><i
+                                                            class="fa fa-trash"></i></a>
                                             </td>
-                                        </tr>
-                                        <?php $i++;?>
-                                        <?php endforeach ?>
-                                    </tbody>
-                                </table>
                             </div>
+                            </tr>
+                            <?php $i++;?>
+                            <?php endforeach ?>
+                            </tbody>
+                            </table>
                         </div>
                     </div>
-
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; ZN Website 2022</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; ZN Website 2022</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->

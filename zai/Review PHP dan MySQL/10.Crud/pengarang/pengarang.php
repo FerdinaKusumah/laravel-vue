@@ -181,39 +181,43 @@ $pengarangs = query("SELECT * FROM pengarang");
                                             <td><?= $pengarang["telp"];?></td>
                                             <td><?= $pengarang["alamat"];?></td>
                                             <td>
-                                                <a
-                                                    href="ubah_pengarang.php?id_pengarang=<?= $pengarang["id_pengarang"];?>">Ubah</a>
-                                                |
-                                                <a href="hapus_pengarang.php?id_pengarang=<?= $pengarang["id_pengarang"];?>"
-                                                    onclick="return confirm('Beneran Pengen Dihapus?');">Hapus</a>
+                                                <div class="d-grid gap-2">
+                                                    <a class="btn btn-info"
+                                                        href="ubah_pengarang.php?id_pengarang=<?= $pengarang["id_pengarang"];?>"><i
+                                                            class="fa fa-pencil-alt"></i></a>
+                                                    <a class="btn btn-danger"
+                                                        href="hapus_pengarang.php?id_pengarang=<?= $pengarang["id_pengarang"];?>"
+                                                        onclick="return confirm('Beneran Pengen Dihapus?');"><i
+                                                            class="fa fa-trash"></i></a>
                                             </td>
-                                        </tr>
-                                        <?php $i++;?>
-                                        <?php endforeach ?>
-                                    </tbody>
-                                </table>
                             </div>
+                            </tr>
+                            <?php $i++;?>
+                            <?php endforeach ?>
+                            </tbody>
+                            </table>
                         </div>
                     </div>
-
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; ZN Website 2022</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; ZN Website 2022</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
