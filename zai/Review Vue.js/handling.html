@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling</title>
+</head>
+
+<body>
+    <div id="klik_button-1">
+        <button v-on:click="counter += 2">Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+    <div id="klik_button-2">
+        <button v-on:click="greet">Greet</button>
+    </div>
+    <br>
+    <div id="klik_button-3">
+        <button v-on:click="say('hay Manis!!')">Say hi</button>
+        <button v-on:click="say('Lagi Apa??')">Say what</button>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    var example1 = new Vue({
+        el: '#klik_button-1',
+        data: {
+            counter: 0
+        }
+    })
+
+
+    var example2 = new Vue({
+        el: '#klik_button-2',
+        data: {
+            name: 'Manis'
+        },
+        // define methods under the `methods` object
+        methods: {
+            greet: function(event) {
+                // `this` inside methods points to the Vue instance
+                alert('Hay ' + this.name + '!!')
+                    // `event` is the native DOM event
+                if (event) {
+                    alert(event.target.tagName)
+                }
+            }
+        }
+    })
+
+
+    new Vue({
+        el: '#klik_button-3',
+        methods: {
+            say: function(message) {
+                alert(message)
+            }
+        }
+    })
+</script>
+
+</html>
