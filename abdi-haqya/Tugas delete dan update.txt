@@ -1,0 +1,5 @@
+1. UPDATE obat SET Stok_gudang = '72' WHERE Nama_Merk = 'Sulvinac'
+2. UPDATE obat SET Stok_gudang = '88' WHERE Nama_Merk = 'Omegtanine'
+3. UPDATE stok SET Jumlah_pesanan = '50' WHERE Nama_Merk = 'Sulvinac'
+4. DELETE obat WHERE Nama_Merk = 'Ranitidine'
+5. DELETE stok WHERE Harga_satuan = '6200'
