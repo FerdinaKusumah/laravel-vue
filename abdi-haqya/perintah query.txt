@@ -1,0 +1,10 @@
+1. Select id_perusahaan from obat where Stok_gudang < 100
+2. Select Nama_Merk,Tanggal_Kadaluarsa fromobat where Stok_gudang = 50
+3. Select id_perusahaan from obat where Tanggal_Kadaluarsa < '2023-05-01'
+4. Select Id_stok from obat where Stok_gudang = 55
+5. Select id from perusahaan where Alamat = Medan - Indonesia
+6. Select Nama_Perusahaan from perusahaan where Alamat = 'Bekasi - Indonesia'
+7. Select id from stok where Tanggal_masuk < '2022-02-01'
+8. Select Nama_merk from stok where Jumlah_pesanan >= 60
+9. Select id, Tanggal_masuk from stok where Harga_satuan = 9000
+10. Select Total_biaya, Harga_satuan from stok where Jumlah_pesanan >= 55
