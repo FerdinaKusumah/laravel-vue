@@ -1,0 +1,23 @@
+---- 10 Macam query yang bisa digunakan untuk table table pada apotek ----
+
+1.  INSERT
+    - INSERT INTO pasien VALUES ("", "Ririn","Kedaung", 25);
+2.  SELECT
+    - SELECT * FROM pasien;
+3.  UPDATE
+    - UPDATE pasien SET nama_pasien='Irman', alamat_pasien='Regency', umur_pasien=28 WHERE id = "3";
+4.  DELETE
+    - DELETE FROM pasien WHERE nama_pasien = "Beni";
+5.  ORDER BY
+    - SELECT nama_pasien, alamat_pasien FROM pasien ORDER BY umur_pasien ASC;
+    - SELECT nama_pasien, alamat_pasien FROM pasien ORDER BY umur_pasien DESC;
+6.  COUNT
+    - SELECT COUNT(id) FROM pasien WHERE alamat_pasien="Cipondoh";
+7.  AVG
+    - SELECT AVG(stok_obat) FROM obat WHERE tgl_kadaluarsa='2024-12-09';
+8.  INNER JOIN
+    - SELECT transaksi.id_obat, obat.nama_obat FROM transaksi INNER JOIN obat ON transaksi.id_obat = obat.id;
+9.  AND
+    - SELECT nama_obat FROM obat WHERE stok_obat=200 AND tgl_kadaluarsa='2024-12-09';
+10. DISTINCT
+    - SELECT DISTINCT alamat_pasien FROM pasien;

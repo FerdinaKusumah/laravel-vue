@@ -1,0 +1,5 @@
+1. UPDATE pasien SET nama_pasien='Irman', alamat_pasien='Regency', umur_pasien=28 WHERE id = "3";
+2. UPDATE obat SET nama_obat='Prommag', stok_obat='200', tgl_kadaluarsa='2024-09-12' WHERE id = '5';
+3. UPDATE transaksi SET id_pasien='5', id_obat='3', jumlah_transaksi='1' WHERE id = '7';
+4. DELETE FROM transaksi WHERE id = '2';
+5. DELETE FROM pasien WHERE nama_pasien = 'Anis';
