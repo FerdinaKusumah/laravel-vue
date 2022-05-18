@@ -17,7 +17,7 @@ class CreateAuthorsTable extends Migration
             $table->id();
             $table->string('name', 64);
             $table->string('email', 50);
-            $table->char('phone_number', 14);
+            $table->char('phone_number', 15);
             $table->text('address');
             $table->timestamps();
         });
