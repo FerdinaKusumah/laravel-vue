@@ -12,10 +12,35 @@
 <hr class="sidebar-divider my-0">
 
 <!-- Nav Item - Dashboard -->
-<li class="nav-item active">
-    <a class="nav-link" href="index.html">
+<li class="nav-item {{ request()->is('home') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('home') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
+</li>
+<li class="nav-item {{ request()->is('catalog') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('catalog') }}">
+        <i class="fas fa-journal-whills"></i>
+        <span>Catalog</span></a>
+</li>
+<li class="nav-item {{ request()->is('author') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('author') }}">
+        <i class="fas fa-journal-whills"></i>
+        <span>Author</span></a>
+</li>
+<li class="nav-item {{ request()->is('book') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('book') }}">
+        <i class="fas fa-journal-whills"></i>
+        <span>Book</span></a>
+</li>
+<li class="nav-item {{ request()->is('member') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('member') }}">
+        <i class="fas fa-journal-whills"></i>
+        <span>Member</span></a>
+</li>
+<li class="nav-item {{ request()->is('publisher') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('publisher') }}">
+        <i class="fas fa-journal-whills"></i>
+        <span>Publisher</span></a>
 </li>
 
 <!-- Divider -->

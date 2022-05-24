@@ -34,7 +34,6 @@
                 <!-- End of Topbar -->
 
               @yield('content')
-
             </div>
             <!-- End of Main Content -->
 
