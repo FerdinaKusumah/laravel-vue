@@ -19,27 +19,27 @@
 </li>
 <li class="nav-item {{ request()->is('catalog') ? 'active' : '' }}">
     <a class="nav-link" href="{{ url('catalog') }}">
-        <i class="fas fa-journal-whills"></i>
+        <i class="fas fa-swatchbook"></i>
         <span>Catalog</span></a>
 </li>
 <li class="nav-item {{ request()->is('author') ? 'active' : '' }}">
     <a class="nav-link" href="{{ url('author') }}">
-        <i class="fas fa-journal-whills"></i>
+        <i class="fas fa-solid fa-universal-access"></i>
         <span>Author</span></a>
 </li>
 <li class="nav-item {{ request()->is('book') ? 'active' : '' }}">
     <a class="nav-link" href="{{ url('book') }}">
-        <i class="fas fa-journal-whills"></i>
+        <i class="fas fa-book-open"></i>
         <span>Book</span></a>
 </li>
 <li class="nav-item {{ request()->is('member') ? 'active' : '' }}">
     <a class="nav-link" href="{{ url('member') }}">
-        <i class="fas fa-journal-whills"></i>
+        <i class="fas fa-users"></i>
         <span>Member</span></a>
 </li>
 <li class="nav-item {{ request()->is('publisher') ? 'active' : '' }}">
     <a class="nav-link" href="{{ url('publisher') }}">
-        <i class="fas fa-journal-whills"></i>
+        <i class="fas fa-file-upload"></i>
         <span>Publisher</span></a>
 </li>
 
