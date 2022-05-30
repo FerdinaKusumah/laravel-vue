@@ -2,63 +2,57 @@
 
 @section('content')
 
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Catalog</h1>
+<!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Catalog</h1>
             <p class="text-muted">Ini Halaman Catalog</p>
             <a href="}" class="btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-plus fa-sm text-white">Tambah Catalog</i>
             </a>
-        </div>
+    </div>
 
-        <div class="row">
-            <div class="card-body">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+<!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Action</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Total Books</th>
+                            <th class="text-center">Created At</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-                        @forelse ($items as $item)
-                            <tr>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->location }}</td>
-                                <td>{{ $item->type }}</td>
-                                <td>{{ $item->departure_date }}</td>
-                                <td>{{ $item->type }}</td>
-                                <td>
-                                    <a href="{{ route('travel-package.edit', $item->id) }}" class="btn btn-info">
-                                        <i class="fa fa-pencil-alt"></i>
-                                    </a>
-                                    <form action="{{ route('travel-package.destroy', $item->id) }}" method="post"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                    <tfoot>
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Total Books</th>
+                            <th class="text-center">Created At</th>
+                            <th class="text-center">Action</th>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center">
-                                    Data Kosong
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody> --}}
+                    </tfoot>
+                    <tbody>
+                        @foreach ($catalogs as $no => $catalog)
+                        <tr>
+                            <td class="text-center">{{ $no+1 }}</td>
+                            <td>{{ $catalog->name }}</td>
+                            <td class="text-center">{{ count($catalog->books) }}</td>
+                            <td class="text-center">{{ date('H:i:s - d M Y', strtotime($catalog->created_at)) }}</td>
+                            <td>//</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
+</div>
     <!-- /.container-fluid -->
 
 @endsection

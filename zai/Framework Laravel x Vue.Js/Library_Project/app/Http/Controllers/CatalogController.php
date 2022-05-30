@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Catalog;
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\VarDumper;
 
 class CatalogController extends Controller
 {
@@ -14,7 +15,10 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.catalog.index');
+        $catalogs = Catalog::with('books')->get();
+
+        // return $catalogs;
+        return view('pages.admin.catalog.index', compact('catalogs'));
     }
 
     /**

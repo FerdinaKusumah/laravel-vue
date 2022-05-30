@@ -17,28 +17,28 @@
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
-<li class="nav-item {{ request()->is('catalog') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('catalog') }}">
+<li class="nav-item {{ request()->is('catalogs') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('catalogs') }}">
         <i class="fas fa-swatchbook"></i>
         <span>Catalog</span></a>
 </li>
-<li class="nav-item {{ request()->is('author') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('author') }}">
+<li class="nav-item {{ request()->is('authors') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('authors') }}">
         <i class="fas fa-solid fa-universal-access"></i>
         <span>Author</span></a>
 </li>
-<li class="nav-item {{ request()->is('book') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('book') }}">
+<li class="nav-item {{ request()->is('books') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('books') }}">
         <i class="fas fa-book-open"></i>
         <span>Book</span></a>
 </li>
-<li class="nav-item {{ request()->is('member') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('member') }}">
+<li class="nav-item {{ request()->is('members') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('members') }}">
         <i class="fas fa-users"></i>
         <span>Member</span></a>
 </li>
-<li class="nav-item {{ request()->is('publisher') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('publisher') }}">
+<li class="nav-item {{ request()->is('publishers') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ url('publishers') }}">
         <i class="fas fa-file-upload"></i>
         <span>Publisher</span></a>
 </li>
