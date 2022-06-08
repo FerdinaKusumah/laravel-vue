@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.author.create');
     }
 
     /**
@@ -37,7 +38,16 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required'
+        ]);
+
+        Author::create($request->all());
+
+        return redirect('admin/authors')->with('success', 'Data Telah Ditambahkan!!');
     }
 
     /**
@@ -59,7 +69,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view('pages.admin.author.edit', compact('author'));
     }
 
     /**
@@ -71,7 +81,16 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+            $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required'
+        ]);
+
+        $author->update($request->all());
+
+        return redirect('admin/authors')->with('success', 'Data Telah di Update!!');
     }
 
     /**
@@ -82,6 +101,8 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete($author->id);
+
+        return redirect('admin/authors')->with('success', 'Data Telah di Hapus!!');
     }
 }

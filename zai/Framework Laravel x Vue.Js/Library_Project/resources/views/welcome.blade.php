@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        
 
         <!-- Styles -->
         <style>
@@ -25,8 +26,18 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+                        <a href="{{ url('/admin') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ auth()->user()->roles }}</a>
+                        <br>
+                        <br>
+                        <form class="form-inline d-sm-block d-md-none" action="{{ url('logout') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">
+                            LogOut
+                        </button>
+                        </form>
+
                     @else
+                    
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
                         @if (Route::has('register'))

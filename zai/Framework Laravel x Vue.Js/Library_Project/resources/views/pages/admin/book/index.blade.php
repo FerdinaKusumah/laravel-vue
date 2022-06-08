@@ -9,10 +9,16 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Book</h1>
             <p class="text-muted">Ini Halaman Book</p>
-            <a href="}" class="btn btn-sm btn-primary shadow-sm">
+            <a href="{{ route('books.create') }}" class="btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-plus fa-sm text-white">Tambah Book</i>
             </a>
     </div>
+
+    @if (session()->has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
 
 <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -59,7 +65,19 @@
                             <td>{{ $book->catalog->name }}</td>
                             <td>{{ $book->qty }}</td>
                             <td>{{ $book->price }}</td>
-                            <td>//</td>
+                            <td>
+                                <a href="{{ route('books.edit', $book->id) }}" class="btn btn-info">
+                                <i class="fa fa-pencil-alt"></i>
+                                </a>
+                                <form action="{{ route('books.destroy', $book->id) }}" method="post"
+                                    class="d-inline" onclick="return confirm('Yakin Ingin Dihapus?')">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

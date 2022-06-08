@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.publisher.create');
     }
 
     /**
@@ -37,7 +38,16 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:64',
+            'email' => 'required|email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required'
+        ]);
+
+        Publisher::create($request->all());
+
+        return redirect('admin/publishers')->with('success', 'Data Telah Ditambahkan!!');
     }
 
     /**
@@ -59,7 +69,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        //
+        return view('pages.admin.publisher.edit', compact('publisher'));
     }
 
     /**
@@ -71,7 +81,16 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:64',
+            'email' => 'required|email',
+            'phone_number' => 'required|max:15',
+            'address' => 'required'
+        ]);
+
+        $publisher->update($request->all());
+
+        return redirect('admin/publishers')->with('success', 'Data Telah Diupdate!!');
     }
 
     /**
@@ -82,6 +101,8 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        $publisher->delete($publisher->id);
+
+        return redirect('admin/publishers')->with('success', 'Data Telah Dihapus!!');
     }
 }

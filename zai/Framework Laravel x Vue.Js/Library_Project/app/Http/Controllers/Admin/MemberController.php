@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\VarDumper;
 
 class MemberController extends Controller
 {
@@ -26,7 +28,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.member.create');
     }
 
     /**
@@ -37,7 +39,17 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $request->validate([
+            'name' => 'required|max:64',
+            'gender' => 'required',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        Member::create($request->all());
+
+        return redirect('admin/members')->with('success', 'Data Telah Ditambahkan!!');
     }
 
     /**
@@ -59,7 +71,7 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        //
+        return view('pages.admin.member.edit', compact('member'));
     }
 
     /**
@@ -71,7 +83,16 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+            $request->validate([
+            'name' => 'required|max:64',
+            'gender' => 'required',
+            'phone_number' => 'required|max:15',
+            'address' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $member->update($request->all());
+        return redirect('admin/members')->with('success', 'Data Telah Diupdate!!');
     }
 
     /**
@@ -82,6 +103,8 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete($member->id);
+
+        return redirect('admin/members')->with('success', 'Data Telah Dihapus!!');
     }
 }

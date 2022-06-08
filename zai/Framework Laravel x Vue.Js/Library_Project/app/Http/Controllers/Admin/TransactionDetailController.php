@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Catalog;
+use App\Http\Controllers\Controller;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
-use Symfony\Component\VarDumper\VarDumper;
 
-class CatalogController extends Controller
+class TransactionDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,7 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        $catalogs = Catalog::with('books')->get();
-
-        // return $catalogs;
-        return view('pages.admin.catalog.index', compact('catalogs'));
+        //
     }
 
     /**
@@ -45,10 +42,10 @@ class CatalogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Catalog  $catalog
+     * @param  \App\Models\TransactionDetail  $transactionDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(Catalog $catalog)
+    public function show(TransactionDetail $transactionDetail)
     {
         //
     }
@@ -56,10 +53,10 @@ class CatalogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Catalog  $catalog
+     * @param  \App\Models\TransactionDetail  $transactionDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Catalog $catalog)
+    public function edit(TransactionDetail $transactionDetail)
     {
         //
     }
@@ -68,10 +65,10 @@ class CatalogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Catalog  $catalog
+     * @param  \App\Models\TransactionDetail  $transactionDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Catalog $catalog)
+    public function update(Request $request, TransactionDetail $transactionDetail)
     {
         //
     }
@@ -79,10 +76,10 @@ class CatalogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Catalog  $catalog
+     * @param  \App\Models\TransactionDetail  $transactionDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Catalog $catalog)
+    public function destroy(TransactionDetail $transactionDetail)
     {
         //
     }

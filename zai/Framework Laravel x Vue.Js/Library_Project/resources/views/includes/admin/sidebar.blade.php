@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
     <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
     </div>
@@ -12,33 +12,33 @@
 <hr class="sidebar-divider my-0">
 
 <!-- Nav Item - Dashboard -->
-<li class="nav-item {{ request()->is('home') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('home') }}">
+<li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('dashboard') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
-<li class="nav-item {{ request()->is('catalogs') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('catalogs') }}">
+<li class="nav-item {{ request()->is('admin/catalogs') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('catalogs.index') }}">
         <i class="fas fa-swatchbook"></i>
         <span>Catalog</span></a>
 </li>
-<li class="nav-item {{ request()->is('authors') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('authors') }}">
+<li class="nav-item {{ request()->is('admin/authors') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('authors.index') }}">
         <i class="fas fa-solid fa-universal-access"></i>
         <span>Author</span></a>
 </li>
-<li class="nav-item {{ request()->is('books') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('books') }}">
+<li class="nav-item {{ request()->is('admin/books') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('books.index') }}">
         <i class="fas fa-book-open"></i>
         <span>Book</span></a>
 </li>
-<li class="nav-item {{ request()->is('members') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('members') }}">
+<li class="nav-item {{ request()->is('admin/members') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('members.index') }}">
         <i class="fas fa-users"></i>
         <span>Member</span></a>
 </li>
-<li class="nav-item {{ request()->is('publishers') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ url('publishers') }}">
+<li class="nav-item {{ request()->is('admin/publishers') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('publishers.index') }}">
         <i class="fas fa-file-upload"></i>
         <span>Publisher</span></a>
 </li>

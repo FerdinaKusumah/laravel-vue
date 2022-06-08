@@ -20,10 +20,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -160,11 +160,13 @@ class HomeController extends Controller
 
         // return $data20;
 
-        $catalogs = Catalog::select('catalogs')->count();
-        $authors = Author::select('authors')->count();
-        $books = Book::select('books')->count();
-        $members = Member::select('members')->count();
-        $publishers = Publisher::select('publishers')->count();
-        return view('home', compact(['catalogs', 'authors', 'publishers', 'books', 'members']));
+        // $catalogs = Catalog::select('catalogs')->count();
+        // $authors = Author::select('authors')->count();
+        // $books = Book::select('books')->count();
+        // $members = Member::select('members')->count();
+        // $publishers = Publisher::select('publishers')->count();
+        // return view('home', compact(['catalogs', 'authors', 'publishers', 'books', 'members']));
+
+        return view('pages.home');
     }
 }

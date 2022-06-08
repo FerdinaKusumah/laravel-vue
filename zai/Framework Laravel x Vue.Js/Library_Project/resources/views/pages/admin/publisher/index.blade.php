@@ -9,7 +9,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Publisher</h1>
             <p class="text-muted">Ini Halaman Publisher</p>
-            <a href="}" class="btn btn-sm btn-primary shadow-sm">
+            <a href="{{ route('publishers.create') }}" class="btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-plus fa-sm text-white">Tambah Publisher</i>
             </a>
         </div>
@@ -47,7 +47,19 @@
                             <td>{{ $publisher->email }}</td>
                             <td class="text-center">{{ $publisher->phone_number }}</td>
                             <td>{{ $publisher->address }}</td>
-                            <td>//</td>
+                            <td>
+                                <a href="{{ route('publishers.edit', $publisher->id) }}" class="btn btn-info">
+                                <i class="fa fa-pencil-alt"></i>
+                                </a>
+                                <form action="{{ route('publishers.destroy', $publisher->id) }}" method="post"
+                                    class="d-inline" onclick="return confirm('Yakin Ingin Dihapus?')">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
