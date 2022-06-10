@@ -27,7 +27,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.author.create');
+        // return view('pages.admin.author.create');
     }
 
     /**
@@ -103,6 +103,6 @@ class AuthorController extends Controller
     {
         $author->delete($author->id);
 
-        return redirect('admin/authors')->with('success', 'Data Telah di Hapus!!');
+        return redirect('admin/authors')->with('success', 'Data Telah Dihapus!!');
     }
 }

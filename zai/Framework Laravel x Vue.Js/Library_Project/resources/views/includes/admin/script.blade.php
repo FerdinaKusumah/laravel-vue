@@ -8,8 +8,15 @@
 <script src="{{ url('backend/js/sb-admin-2.min.js') }}"></script>
 
 <!-- Page level plugins -->
-    <script src="{{ url('backend/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ url('backend/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url('backend/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url('backend/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="{{ url('backend/js/demo/datatables-demo.js') }}"></script>
+<!-- Page level custom scripts -->
+<script src="{{ url('backend/js/demo/datatables-demo.js') }}"></script>
+
+    <!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+@yield('js')

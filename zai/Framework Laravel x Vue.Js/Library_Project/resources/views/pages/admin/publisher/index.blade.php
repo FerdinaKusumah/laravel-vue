@@ -1,18 +1,27 @@
 @extends('layouts.admin')
 
+@section('css')
+
 @section('content')
 
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div id="controller">
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Publisher</h1>
+<!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Publisher</h1>
             <p class="text-muted">Ini Halaman Publisher</p>
-            <a href="{{ route('publishers.create') }}" class="btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-plus fa-sm text-white">Tambah Publisher</i>
-            </a>
+            <!-- Button trigger modal -->
+            <button type="button" @click="addData()" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+            Create New Publisher
+            </button>
+    </div>
+    @if (session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
         </div>
+    @endif
 
 <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -48,17 +57,12 @@
                             <td class="text-center">{{ $publisher->phone_number }}</td>
                             <td>{{ $publisher->address }}</td>
                             <td>
-                                <a href="{{ route('publishers.edit', $publisher->id) }}" class="btn btn-info">
+                                <a href="#" @click="editData({{ $publisher }})" class="btn btn-info">
                                 <i class="fa fa-pencil-alt"></i>
                                 </a>
-                                <form action="{{ route('publishers.destroy', $publisher->id) }}" method="post"
-                                    class="d-inline" onclick="return confirm('Yakin Ingin Dihapus?')">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-danger">
+                                <a href="" class="btn btn-danger" @click="deleteData({{ $publisher->id }})">
                                     <i class="fa fa-trash"></i>
-                                </button>
-                                </form>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -67,7 +71,117 @@
             </div>
         </div>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create New Publisher</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form :action="actionUrl" method="post">
+                    @csrf
+
+                    <input type="hidden" name="_method" value="PUT" v-if="editStatus">
+                    <div class="form-group">
+                        <label for="name">Name Publisher</label>
+                        <input type="text" class="form-control @error('name') is-invalid
+                        @enderror" name="name" :value="data.name" autofocus placeholder="Enter Name">
+
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control @error('email') is-invalid
+                        @enderror" name="email" :value="data.email" autofocus placeholder="Enter Email">
+
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" class="form-control @error('phone_number') is-invalid
+                        @enderror" name="phone_number" :value="data.phone_number" autofocus placeholder="Enter Phone Number">
+
+                        @error('phone_number')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea name="address" rows="10" class="d-block w-100 form-control @error('address') is-invalid
+                            
+                        @enderror" :value="data.address"></textarea>
+
+                        @error('address')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Simpan
+                    </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
 </div>
 <!-- /.container-fluid -->
 
 @endsection
+
+@section('js')
+    <script type="text/javascript">
+        var controller = new Vue({
+            el: '#controller',
+            data: {
+                data : {},
+                actionUrl : '{{ url('admin/publishers') }}',
+                editStatus : false 
+            },
+            methods: {
+                addData() {
+                    this.data = {};
+                    this.actionUrl = '{{ url('admin/publishers') }}';
+                    this.editStatus = false;
+                    $('#staticBackdrop').modal();
+                },
+                editData(data) {
+                    this.data = data;
+                    this.actionUrl = '{{ url('admin/publishers') }}'+'/'+data.id;
+                    this.editStatus = true;   
+                    $('#staticBackdrop').modal();               
+                },
+                deleteData(id) {
+                    this.actionUrl = '{{ url('admin/publishers') }}'+'/'+id;
+                    if (confirm("Yakin Dihapus?")) {
+                        axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
+                            location.reload();
+                        })
+                    }
+                }
+            }
+        });
+    </script>
+@endsection
+
