@@ -37,7 +37,11 @@ Route::prefix('admin')
             Route::resource('members', MemberController::class);
             Route::resource('publishers', PublisherController::class);
         
+            Route::get('api/authors', [AuthorController::class, 'api']);
+            Route::get('api/members', [MemberController::class, 'api']);
+            Route::get('api/publishers', [PublisherController::class, 'api']);
     });
+
     
     
 

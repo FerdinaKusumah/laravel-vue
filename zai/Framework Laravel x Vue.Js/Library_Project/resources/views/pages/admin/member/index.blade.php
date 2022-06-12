@@ -1,30 +1,39 @@
 @extends('layouts.admin')
 
+@section('css')
+
 @section('content')
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <div id="controller">
 
 <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Member</h1>
             <p class="text-muted">Ini Halaman Member</p>
-            <a href="{{ route('members.create') }}" class="btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-plus fa-sm text-white">Tambah Member</i>
-            </a>
+            <!-- Button trigger modal -->
+            <button type="button" @click="addData()" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+            Create New Member
+            </button>
     </div>
+    @if (session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
 
 <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="2">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Gender</th>
-                            <th class="text-center">Phone_Number</th>
+                            <th class="text-center">Phone Number</th>
                             <th class="text-center">Address</th>
                             <th class="text-center">Email</th>
                             <th class="text-center">Action</th>
@@ -35,42 +44,170 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Gender</th>
-                            <th class="text-center">Phone_Number</th>
+                            <th class="text-center">Phone Number</th>
                             <th class="text-center">Address</th>
                             <th class="text-center">Email</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </tfoot>
-                    <tbody>
-                        @foreach ($members as $no => $member)
-                        <tr>
-                            <td class="text-center">{{ $no+1 }}</td>
-                            <td>{{ $member->name }}</td>
-                            <td class="text-center">{{ $member->gender }}</td>
-                            <td class="text-center">{{ $member->phone_number }}</td>
-                            <td>{{ $member->address }}</td>
-                            <td>{{ $member->email }}</td>
-                            <td>
-                                <a href="{{ route('members.edit', $member->id) }}" class="btn btn-info">
-                                <i class="fa fa-pencil-alt"></i>
-                                </a>
-                                <form action="{{ route('members.destroy', $member->id) }}" method="post"
-                                    class="d-inline" onclick="return confirm('Yakin Ingin Dihapus?')">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create New Member</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form :action="actionUrl" method="post" @submit="submitForm($event, data.id)">
+                    @csrf
+
+                    <input type="hidden" name="_method" value="PUT" v-if="editStatus">
+                    <div class="form-group">
+                        <label for="name">Name Member</label>
+                        <input type="text" class="form-control @error('name') is-invalid
+                        @enderror" name="name" :value="data.name" autofocus placeholder="Enter Name">
+
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                     <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <div class="form-check">
+                        <input class="form-check-input @error('gender') is-invalid @enderror" type="radio" id="genderM" name="gender" value="M" v-model="data.gender">
+                        <label class="form-check-label" for="genderM">
+                            Male
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input @error('gender') is-invalid @enderror" type="radio" id="genderF" name="gender" value="F" v-model="data.gender" autofocus>
+                        <label class="form-check-label" for="genderF">
+                            Female
+                        </label>
+                        @error('gender')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" class="form-control @error('phone_number') is-invalid
+                        @enderror" name="phone_number" :value="data.phone_number" autofocus placeholder="Enter Phone Number">
+                        
+                        @error('phone_number')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea name="address" rows="10" class="d-block w-100 form-control @error('address') is-invalid
+                        
+                        @enderror" :value="data.address"></textarea>
+                        
+                        @error('address')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control @error('email') is-invalid
+                        @enderror" name="email" :value="data.email" autofocus placeholder="Enter Email">
+
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Simpan
+                    </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
 </div>
 <!-- /.container-fluid -->
 
 @endsection
+
+@section('js')
+<script type="text/javascript">
+    var actionUrl = '{{ url('admin/members') }}';
+    var apiUrl = '{{ url('admin/api/members') }}';
+
+    var columns = [
+        {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+        {data: 'name', class: 'text-center', orderable: true},
+        {data: 'gender', class: 'text-center', orderable: true},
+        {data: 'phone_number', class: 'text-center', orderable: true},
+        {data: 'address', orderable: true},
+        {data: 'email', class: 'text-center', orderable: true},
+        {render: function (index, row, data, meta) {
+            return `
+                <a href="#" class="btn btn-info btn-sm" onclick="controller.editData(event, ${meta.row})">
+                <i class="fa fa-pencil-alt fa-2x"></i>
+                </a>
+                <a href="#" class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+                <i class="fa fa-trash fa-2x"></i>
+                </a>`;
+        }, orderable: false, width: '200px', class: 'text-center'},
+    ];
+</script>
+<script src="{{ url('backend/js/data.js') }}"></script>
+    {{-- <script type="text/javascript">
+        var controller = new Vue({
+            el: '#controller',
+            data: {
+                data : {},
+                actionUrl : '{{ url('admin/publishers') }}',
+                editStatus : false 
+            },
+            methods: {
+                addData() {
+                    this.data = {};
+                    this.actionUrl = '{{ url('admin/publishers') }}';
+                    this.editStatus = false;
+                    $('#staticBackdrop').modal();
+                },
+                editData(data) {
+                    this.data = data;
+                    this.actionUrl = '{{ url('admin/publishers') }}'+'/'+data.id;
+                    this.editStatus = true;   
+                    $('#staticBackdrop').modal();               
+                },
+                deleteData(id) {
+                    this.actionUrl = '{{ url('admin/publishers') }}'+'/'+id;
+                    if (confirm("Yakin Dihapus?")) {
+                        axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
+                            location.reload();
+                        })
+                    }
+                }
+            }
+        });
+    </script> --}}
+@endsection
+

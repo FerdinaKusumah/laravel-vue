@@ -48,25 +48,6 @@
                             <th class="text-center">Action</th>
                         </tr>
                     </tfoot>
-                    <tbody>
-                        @foreach ($publishers as $no => $publisher)
-                        <tr>
-                            <td class="text-center">{{ $no+1 }}</td>
-                            <td>{{ $publisher->name }}</td>
-                            <td>{{ $publisher->email }}</td>
-                            <td class="text-center">{{ $publisher->phone_number }}</td>
-                            <td>{{ $publisher->address }}</td>
-                            <td>
-                                <a href="#" @click="editData({{ $publisher }})" class="btn btn-info">
-                                <i class="fa fa-pencil-alt"></i>
-                                </a>
-                                <a href="" class="btn btn-danger" @click="deleteData({{ $publisher->id }})">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -83,7 +64,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form :action="actionUrl" method="post">
+        <form :action="actionUrl" method="post" @submit="submitForm($event, data.id)">
                     @csrf
 
                     <input type="hidden" name="_method" value="PUT" v-if="editStatus">
@@ -151,7 +132,29 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript">
+<script type="text/javascript">
+    var actionUrl = '{{ url('admin/publishers') }}';
+    var apiUrl = '{{ url('admin/api/publishers') }}';
+
+    var columns = [
+        {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+        {data: 'name', class: 'text-center', orderable: true},
+        {data: 'email', class: 'text-center', orderable: true},
+        {data: 'phone_number', class: 'text-center', orderable: true},
+        {data: 'address', orderable: true},
+        {render: function (index, row, data, meta) {
+            return `
+                <a href="#" class="btn btn-info btn-sm" onclick="controller.editData(event, ${meta.row})">
+                <i class="fa fa-pencil-alt fa-2x"></i>
+                </a>
+                <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
+                <i class="fa fa-trash fa-2x"></i>
+                </a>`;
+        }, orderable: false, width: '200px', class: 'text-center'},
+    ];
+</script>
+<script src="{{ url('backend/js/data.js') }}"></script>
+    {{-- <script type="text/javascript">
         var controller = new Vue({
             el: '#controller',
             data: {
@@ -182,6 +185,6 @@
                 }
             }
         });
-    </script>
+    </script> --}}
 @endsection
 

@@ -16,9 +16,15 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::all();
+        return view('pages.admin.member.index');
+    }
 
-        return view('pages.admin.member.index', compact('members'));
+    public function api()
+    {
+        $members = Member::all();
+        $datatables = datatables()->of($members)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
