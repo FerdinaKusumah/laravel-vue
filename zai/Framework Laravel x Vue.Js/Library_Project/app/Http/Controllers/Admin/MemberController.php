@@ -52,7 +52,6 @@ class MemberController extends Controller
             'address' => 'required',
             'email' => 'required|email'
         ]);
-
         Member::create($request->all());
 
         return redirect('admin/members')->with('success', 'Data Telah Ditambahkan!!');

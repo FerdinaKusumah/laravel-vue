@@ -18,9 +18,18 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with(['publisher', 'author', 'catalog'])->get();
+        $publishers = Publisher::all();
+        $authors = Author::all();
+        $catalogs = Catalog::all();
 
-        return view('pages.admin.book.index', compact('books'));
+        return view('pages.admin.book.index', compact(['publishers', 'authors', 'catalogs']));
+    }
+
+    public function api()
+    {
+        $books = Book::all();
+
+        return json_encode($books);
     }
 
     /**

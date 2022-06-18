@@ -57,7 +57,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+    <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Create New Member</h5>
@@ -84,13 +84,13 @@
                      <div class="form-group">
                         <label for="gender">Gender</label>
                         <div class="form-check">
-                        <input class="form-check-input @error('gender') is-invalid @enderror" type="radio" id="genderM" name="gender" value="M" v-model="data.gender">
+                        <input class="form-check-input @error('gender') is-invalid @enderror" type="radio" name="gender" v-model="data.gender" value="M">
                         <label class="form-check-label" for="genderM">
                             Male
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input @error('gender') is-invalid @enderror" type="radio" id="genderF" name="gender" value="F" v-model="data.gender" autofocus>
+                        <input class="form-check-input @error('gender') is-invalid @enderror" type="radio" name="gender" v-model="data.gender" value="F">
                         <label class="form-check-label" for="genderF">
                             Female
                         </label>
