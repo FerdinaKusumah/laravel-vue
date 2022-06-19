@@ -35,6 +35,7 @@
                             <th class="text-center">Email</th>
                             <th class="text-center">Phone Number</th>
                             <th class="text-center">Address</th>
+                            <th class="text-center">Created At</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -45,6 +46,7 @@
                             <th class="text-center">Email</th>
                             <th class="text-center">Phone Number</th>
                             <th class="text-center">Address</th>
+                            <th class="text-center">Created At</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </tfoot>
@@ -142,6 +144,7 @@
         {data: 'email', class: 'text-center', orderable: true},
         {data: 'phone_number', class: 'text-center', orderable: true},
         {data: 'address', orderable: true},
+        {data: 'date', class: 'text-center', orderable: true},
         {render: function (index, row, data, meta) {
             return `
                 <a href="#" class="btn btn-info btn-sm" onclick="controller.editData(event, ${meta.row})">
