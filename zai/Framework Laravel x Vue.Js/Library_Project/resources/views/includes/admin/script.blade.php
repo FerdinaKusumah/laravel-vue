@@ -1,4 +1,7 @@
+{{-- <script src="{{ url('backend/js/jquery-3.6.0.min.js') }}"></script> --}}
+
 <script src="{{ url('backend/vendor/jquery/jquery.min.js') }}"></script>
+
 <script src="{{ url('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 <!-- Core plugin JavaScript-->
@@ -18,5 +21,10 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+<!-- Page level plugins -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 @yield('js')
